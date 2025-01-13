@@ -54,7 +54,34 @@ As discussed above, GitHub's colour scheme will have already been tested for acc
 
 ### Software
 
+This is an initial view of the design of the software.
+
+### Architecture
+
+The software will have a frontend, built in React, this will implement a responsive user interface. It will then feature a backend which will be hosted to handle the Markdown-to-HTML rendering, this will allow us to adopt a server-side processing approach. Server-side processing is appropriate as this project is at a small scale, as such, we will not be overly concerned with servers being overwhelmed.
+
+#### Backend Architecture
+
+The backend will be implemented with Node.js, and will feature two main endpoints:
+- GET `/render` - this will convert Markdown to HTML
+- GET `/fonts` - this will return a list of available fonts to the user
+
+#### Frontend Architecture
+
+The frontend will be implemented with React, and will feature these main components:
+- Welcome Page:
+  - An icon for light and dark mode
+  - A text area for title and description
+  - A button for the "Start Editing" button
+- Editing Screen:
+   - A text area where the user will input the Markdown and it is converted to HTML
+   - A header to contain the title and light and dark mode selector
+   - A sidebar to contain the font selector, and control buttons
+   - Several buttons within the sidebar for controls
+
 ### Implementation Approach
+
+In order to ensure the program is robust a Test-Driven Development approach will be taken. This will require that before adding a feature, a test is written to test the feature, and then the feature is implemented to make the test pass. In order to test the frontend we will use Jest's React Testing Library to perform component-level testing to ensure that all components are implemented as designed. In order to ensure that the backend functions correctly, integration unit tests will be written to test each endpoint and its function, any externals will be mocked to ensure that our code is being tested. In order to supplement this implementation approach, we will use GitHub Actions to implement a CI/CD pipeline that ensures that the project builds, that all tests pass, and that the code is linted in the correct format, before a PR can be merged. We will also use the pipeline to deliver any changes from a PR to the live software once merged.
 
 ## Planning
 
