@@ -192,10 +192,10 @@ Eric Feels:
 
 Based on the personas and empathy maps, I have created 5 high-level user stories:
 1. As a user, I want to view live previews of my Markdown content so that I can immediately see how it will render any rectify any issues.
-2. As a user, I want the option to customise the view of the editor, such as, switching between light and dark mode
-3. As a user, I want the editor to be lightweight and intuitive.
-4. As a user, I want to create and edit Markdown with syntax highlighting.
-5. As a user, I want the tool to be accessible via the web.
+2. As a user, I want the option to customise the view of the editor, such as, switching between light and dark mode so that the website is accessible.
+3. As a user, I want the editor to be lightweight and intuitive, so that I can focus on editing Markdown rather than learning the tool I am using.
+4. As a user, I want to create and edit Markdown with syntax highlighting, so that code in the Markdown can be read easily.
+5. As a user, I want the tool to be accessible via the web, so that I can avoid downloading more software to my machine.
 
 ### MoSCoW Prioritisation
 
@@ -212,13 +212,34 @@ Notably, I have added wont have "Collaboration Features"; this is something that
 
 ### Project Management
 
+All of the project management strategy will be carried out using tools available in GitHub, this is ideal as it ensures that the Source Code Management and Project Management are in the same place. Below are details of different items we will use to manage this project, how they will be used, and why we are using them.
+
 #### Issues, Epics and Stories
 
-#### Labels
+The primary tool to allocate and decide work, both for bugs, features, infrastructure changes, and anything else, will be through GitHub issues. These are available on the repositories [issue page](https://github.com/Dinoosawruss/software-engineering-summative-1/issues) and provide an outlet to write a description for any piece of work that will be carried out.
+
+There will be five types of issue used within the project:
+1. Feature Story - A piece of work that is a feature to be added, this should be in the form of a user story (i.e. As a user, I want to do x, so that I can y).
+2. Epic - These will be a collection of work in the form of Feature Story or Infrastructure (below) issues. The Epic should have a description that covers all of the work within it.
+3. Bug - Any bugs within the project should be reported through bug issues, these will be handled outside the normal project management scheme and will not be part of a Sprint, Epic, etc.
+4. Infrastructure - These are changes that involve changes to any development or project management infrastructure used by the project.
+5. Other - Any issue required that does not easily fit into one of these categories.
+
+Infrastructure and Feature issues will always be assigned to an Epic unless they are clearly a discrete and standalone piece of work. This will ensure that the project is driven in a way where features are always associated with some larger piece of work.
 
 #### Sizing
 
+As part of the Feature and Infrastructure issue creation process, they should be sized. In this project we will use shirt sizing in order to allocate the size of each issue, i.e. Small, Medium, Large, Extra Large. The size allocated should be based on the amount of work that the change is expected to require, rather than some measure of time; one should not consider how long it will take them to implement the feature, they should consider how much work it will be. The sizing of issues will ensure that the amount of work within each sprint can be balanced and that issues remain an appropriate size. Any issues sized as Extra Large are to big, it is required that they are broken up into smaller issues.
+
+Only Infrastructure, Feature and *some* Other issues should be sized. Any issue that is sized should, ideally, be associated with an Epic as it should form a larger piece of work.
+
+#### Prioritisation
+
 #### Sprints
+
+#### Labels
+
+In order to facilitate the issue types
 
 #### GitHub Projects
 
