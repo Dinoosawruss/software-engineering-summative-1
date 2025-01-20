@@ -190,11 +190,25 @@ Eric Feels:
 
 #### High-Level User Stories
 
-Based on the personas and empathy maps, I have created 5 high-level user stories.
-
-### Roadmap
+Based on the personas and empathy maps, I have created 5 high-level user stories:
+1. As a user, I want to view live previews of my Markdown content so that I can immediately see how it will render any rectify any issues.
+2. As a user, I want the option to customise the view of the editor, such as, switching between light and dark mode
+3. As a user, I want the editor to be lightweight and intuitive.
+4. As a user, I want to create and edit Markdown with syntax highlighting.
+5. As a user, I want the tool to be accessible via the web.
 
 ### MoSCoW Prioritisation
+
+In order to prioritise the stories that will be completed, I have created a MoSCoW prioritisation, this will allow me to decide which stories are the most important to be developed, and which can be left to later stages or made optional.
+
+| Must Have | Should Have | Could Have | Wont Have |
+| - | - | - | - |
+| Live Markdown Preview | Dark and Light Mode | Export Options | Collaboration Features |
+| Lightweight Design | Syntax Highlighting | Offline Mode
+| Web Accessibility | | Templates |
+| Accessible Design | | Responsible Web Design
+
+Notably, I have added wont have "Collaboration Features"; this is something that I feel would enhance the educational aspect of the tool, to suit Educator Eric, and is something that I would like to add in the future, but I do not feel it fits into the scope of this MVP.
 
 ### Project Management
 
