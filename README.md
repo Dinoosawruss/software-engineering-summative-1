@@ -229,21 +229,29 @@ Infrastructure and Feature issues will always be assigned to an Epic unless they
 
 #### Sizing
 
-As part of the Feature and Infrastructure issue creation process, they should be sized. In this project we will use shirt sizing in order to allocate the size of each issue, i.e. Small, Medium, Large, Extra Large. The size allocated should be based on the amount of work that the change is expected to require, rather than some measure of time; one should not consider how long it will take them to implement the feature, they should consider how much work it will be. The sizing of issues will ensure that the amount of work within each sprint can be balanced and that issues remain an appropriate size. Any issues sized as Extra Large are to big, it is required that they are broken up into smaller issues.
+As part of the Feature and Infrastructure issue creation process, they should be sized. In this project we will use shirt sizing in order to allocate the size of each issue, i.e. Small, Medium, Large, Extra Large. The size allocated should be based on the amount of work that the change is expected to require, rather than some measure of time; one should not consider how long it will take them to implement the feature, they should consider how much work it will be. The sizing of issues will ensure that the amount of work within each sprint can be balanced and that issues remain an appropriate size. Any issues sized as Extra Large are to big, it is required that they are broken up into smaller issues. Sizes will be displayed in the form of labels.
 
 Only Infrastructure, Feature and *some* Other issues should be sized. Any issue that is sized should, ideally, be associated with an Epic as it should form a larger piece of work.
 
 #### Prioritisation
 
+All issues, except for Epics, should be allocated a priority, this will allow the assessment of the importance of that piece of work. The priority allocations available will be Urgent, High, Medium, and Low. This priority should consider both the importance of the issue being completed, but also the importance of issues it may block. Urgent issues will be reserved for things that are absolutely critical, due to their nature, they should be the next thing completed within the current sprint no matter what. Similarly to sizing, prioritisation will be displayed in the form of labels.
+
 #### Sprints
 
-#### Labels
-
-In order to facilitate the issue types
+The development of the project will be completed incrementally using sprints. A sprint is a short period where a set amount of work should be completed. Due to the time constraints of this project, each sprint will be a one day period, except for Sprint 0 which is the initialisation sprint that all planning work is completed in. Each issue should be allocated a sprint label, and a new sprint label should be created if a further sprint will be required. This will allow for an iterative development approach. Each sprint should aim to complete a set of or single Epic, depending on the size of the Epic. If an Epic is not completed within the sprint period then it should be carried over into the next sprint.
 
 #### GitHub Projects
 
+In order to manage the work and view it, we will use a Kanban board with GitHub Projects. The GitHub Project for this repository is available [here](https://github.com/users/Dinoosawruss/projects/1). The board will have columns for work that is on the backlog, in progress, blocked, in review, and done. As work is worked on it should be moved across the board to the appropriate column to ensure that the GitHub Project reflects the current state of the project. There is also a tab for Epics on the project board, this tab will show a table of all of the epics, along with their status and label to display which sprint it is part of. The project also features a PR tab which will show a page with the current status of all of the pull requests in the project.
+
+The aim of the GitHub Project board is to give any stakeholder a simple view of the current state of the project. If this were a traditional open source project, this would allow anyone to see the current state of the project and see what work may be available to be picked up. For this project, the board will primarily be used for my own internal tracking to ensure that I maintain situational awareness on which items are in progress, on the backlog, or blocked.
+
 ### Risks
+
+The primary project risk is the time constraint. Due to this I have decided to create a sprint cycle of a single day, this means that if work is not completed in a sprint it could significantly delay further sprints as there is not the time allowance to rectify the issue. This could result in the final project missing some features.
+
+A further risk is performance, as we will use server-side rendering. If a large Markdown file was used or a significant number of individuals decided to use the tool at the same time they may encounter performance issues as only limited resource will be allocated to the website.
 
 ## Documentation
 
