@@ -14,7 +14,4 @@ Instructions:
 ### Epic Details
 <!-- Describe the epic at a high level -->
 
-### Stories
-1. #x
-2. #y
-3. #z
+<!-- All of the stories in this epic should be added as sub issues using the "Add Sub-Issue" button below -->
