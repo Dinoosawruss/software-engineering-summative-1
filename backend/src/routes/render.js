@@ -1,9 +1,14 @@
 const express = require("express");
+const marked = require("marked");
 
 const router = express.Router();
 
 router.post("/", (req, res) => {
-    res.json({"html": "<h1>Hello World</h1>"});
+    const { markdown } = req.body;
+
+    const html = marked.parse(markdown);
+    res.json({html});
+
 })
 
 module.exports = router;
