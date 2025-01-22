@@ -133,4 +133,29 @@ describe("POST /render", () => {
         expect(response.status).toBe(400);
         expect(response.body.error).toContain("Markdown is required. Please send with { \"markdown\": {markdown} }");
     });
+
+    it("should return an error if no Markdown is supplied", async () => {
+        const response = await request(app)
+            .post("/render")
+            .send();
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toContain("Markdown is required. Please send with { \"markdown\": {markdown} }");
+    });
+
+    it("should handle server errors gracefully", async () => {
+        jest.spyOn(marked, "parse").mockImplementation(() => {
+            throw new Error("Test error");
+        });
+    
+        const response = await request(app)
+            .post('/render')
+            .send({ markdown: "# Test" });
+    
+        expect(response.status).toBe(500);
+        expect(response.body.error).toContain("Error rendering Markdown");
+    
+        // Restore the mocked function
+        jest.restoreAllMocks();
+    });
 });
