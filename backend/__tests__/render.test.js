@@ -124,4 +124,13 @@ describe("POST /render", () => {
         expect(response.status).toBe(200);
         expect(response.body.html).toContain("<hr>");
     });
+
+    it("should return an error if no Markdown is supplied", async () => {
+        const response = await request(app)
+            .post("/render")
+            .send();
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toContain("Markdown is required. Please send with { \"markdown\": {markdown} }");
+    });
 });
