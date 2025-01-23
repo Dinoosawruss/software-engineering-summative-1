@@ -197,6 +197,27 @@ export default function Home() {
     setIsDarkMode((prev) => !prev);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      toggleTheme();
+    }
+  };
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (event) => {
+      // Prevent default action for Ctrl/Cmd + S and Ctrl/Cmd + O
+      if (event.ctrlKey || event.metaKey) {
+        if (event.key === 's') {
+          event.preventDefault();
+          saveMarkdown();
+        } else if (event.key === 'o') {
+          event.preventDefault();
+          loadMarkdown();
+        }
+      }
+    }
+  });
+
   return (
     <div className="main">
       <h1 className="goodmark">
@@ -207,7 +228,9 @@ export default function Home() {
           height="32"
           onClick={toggleTheme}
           aria-label="Toggle the theme between dark and light mode"
-          tabIndex="1"
+          aria-controls="Press [Enter] or [Space] to toggle"
+          tabIndex="0"
+          onKeyDown={handleKeyPress}
         />
         <strong><u>GoodMark</u></strong>
       </h1>
