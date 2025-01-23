@@ -11,8 +11,8 @@ describe("Markdown Editor", () => {
 
   test("that the page renders the preview area", () => {
     render(<Home />);
-    const heading = screen.getByTestId("markdown-preview");
-    expect(heading).toBeInTheDocument();
+    const preview = screen.getByTestId("markdown-preview");
+    expect(preview).toBeInTheDocument();
   });
 
   test("that the page renders the heading element", () => {
@@ -26,5 +26,16 @@ describe("Markdown Editor", () => {
     const textarea = screen.getByTestId("markdown-editor");
     fireEvent.change(textarea, { target: { value: "# Hello" } });
     expect(textarea.value).toBe("# Hello");
+  });
+
+  test("that the Markdown preview is displayed when Markdown is entered in the textarea", () => {
+    render(<Home />);
+    const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-editor");
+
+    expect(preview).toHaveTextContent("");
+
+    fireEvent.change(textarea, { target: { value: "Hello" } });
+    expect(preview).toHaveTextContent("Hello");
   });
 });
