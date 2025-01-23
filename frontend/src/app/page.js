@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Courier_Prime } from "next/font/google";
 import Prism from "prismjs";
+import Image from "next/image";
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
@@ -15,11 +16,13 @@ const courierPrime = Courier_Prime({
 export default function Home() {
   const [editorText, setEditorText] = useState("");
   const [renderedText, setRenderedText] = useState("");
-  const [clearButtonColour, setClearColour] = useState("#3D444D");
+  const [clearConfirmClass, setClearConfirmClass] = useState("noConfirm");
   const [clearButtonText, setClearText] = useState("Clear Markdown");
   const [activeClear, setActiveClearValue] = useState(false);
   const [fonts, setFonts] = useState([]);
   const [selectedFont, setSelectedFont] = useState("\"Courier Prime\" monospace");
+  const [currentIcon, setCurrentIcon] = useState("darkMode.svg");
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const fontStyle = selectedFont ? { fontFamily: `${selectedFont}` } : {};
 
@@ -36,6 +39,24 @@ export default function Home() {
     };
     fetchFonts();
   }, [backendUrl]);
+
+  useEffect(() => {
+    setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDarkMode) {
+      setCurrentIcon("darkMode.svg");
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      setCurrentIcon("lightMode.svg");
+      root.setAttribute('data-theme', 'light');
+    }
+
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
 
   const handleEditorChange = (event) => {
     const newValue = event.target.value;
@@ -144,13 +165,13 @@ export default function Home() {
     setActiveClearValue(value);
 
     if (value) {
-      setClearColour("#F28260");
+      setClearConfirmClass("confirm");
       setClearText("Confirm Clear?");
 
       return;
     }
 
-    setClearColour("#3D444D");
+    setClearConfirmClass("noConfirm");
     setClearText("Clear Markdown");
   };
 
@@ -169,9 +190,21 @@ export default function Home() {
     setActiveClear(false);
   }
 
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
   return (
     <div className="main">
-      <h1 className="goodmark"><strong><u>GoodMark</u></strong></h1>
+      <h1 className="goodmark">
+        <Image
+          src={currentIcon}
+          alt="Icon showing the current dark/light mode setting"
+          width="32"
+          height="32"
+          onClick={toggleTheme} />
+        <strong><u>GoodMark</u></strong>
+      </h1>
       <div className="container">
         <textarea
           className="textzone"
@@ -188,17 +221,17 @@ export default function Home() {
           <div className="mainButtons">
             <select
               id="fontSelector"
+              data-testid="font-selector"
               onChange={(e) => {
                 console.log(e.target.value);
                 setSelectedFont(e.target.value);
                 console.log(selectedFont)
-              }
-              }
+              }}
               value={selectedFont}
               style={fontStyle}
             >
               {fonts.map((font) => (
-                <option key={font.value} value={font.value}>
+                <option data-testid="font-selector-option" key={font.value} value={font.value}>
                   {font.name}
                 </option>
               ))}
@@ -211,7 +244,7 @@ export default function Home() {
             >Load Markdown</button>
           </div>
           <button
-            style={{ backgroundColor: clearButtonColour }}
+            className={clearConfirmClass}
             onClick={clearMarkdown}
           >{clearButtonText}</button>
         </div>

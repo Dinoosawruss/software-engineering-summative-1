@@ -1,17 +1,16 @@
 @tailwind base;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+[data-theme="light"] {
+  --background: #F6F8FA;
+  --foreground: #25292E;
+  --interactable-background: #D1D9E0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0D1117;
-    --foreground: #FFFFFF;
-    --interactable-background: #3D444D;
-  }
+[data-theme="dark"] {
+  --background: #0D1117;
+  --foreground: #FFFFFF;
+  --interactable-background: #3D444D;
 }
 
 .main {
@@ -64,14 +63,24 @@ textarea:focus, .preview:focus {
   outline: none;
 }
 
+.confirm {
+  background: #F28260 !important;
+}
+
 button {
   background: var(--interactable-background);
 }
+
 
 .goodmark {
   font-family: "Courier Prime", monospace;
   font-size: 32px;
   margin-left: 1vw;
+  display: flex;
+}
+
+.goodmark img {
+  margin-right: 1vw;
 }
 
 h1 {
