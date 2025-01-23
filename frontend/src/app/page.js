@@ -16,7 +16,7 @@ export default function Home() {
   const [renderedText, setRenderedText] = useState("");
   const [clearButtonColour, setClearColour] = useState("#3D444D");
   const [clearButtonText, setClearText] = useState("Clear Markdown")
-  const [activeClear, setActiveClear] = useState(false)
+  const [activeClear, setActiveClearValue] = useState(false)
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -24,6 +24,7 @@ export default function Home() {
     const newValue = event.target.value;
     setEditorText(newValue); // Update the state
     handleRender(newValue);  // Call the function with the latest value
+    resetClearMarkdown(); // Reset the clear confirmation back to false
   };
 
   const handleRender = async (markdown) => {
@@ -45,22 +46,34 @@ export default function Home() {
 
   const loadMarkdown = (event) => { };
 
+  const setActiveClear = (value) => {
+    setActiveClearValue(value);
+
+    if (value) {
+      setClearColour("#F28260");
+      setClearText("Confirm Clear?");
+
+      return;
+    }
+
+    setClearColour("#3D444D");
+    setClearText("Clear Markdown");
+  };
+
   const clearMarkdown = () => {
     if (activeClear) {
       setEditorText("");
-
-      setClearColour("#3D444D");
-      setClearText("Clear Markdown");
 
       setActiveClear(false);
       return;
     }
 
-    setClearColour("#F28260");
-    setClearText("Confirm Clear?");
-
     setActiveClear(true)
-  };
+  }
+
+  const resetClearMarkdown = () => {
+    setActiveClear(false);
+  }
 
   return (
     <div className="main">
