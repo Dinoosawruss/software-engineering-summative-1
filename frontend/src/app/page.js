@@ -14,6 +14,9 @@ const courierPrime = Courier_Prime({
 export default function Home() {
   const [editorText, setEditorText] = useState("");
   const [renderedText, setRenderedText] = useState("");
+  const [clearButtonColour, setClearColour] = useState("#3D444D");
+  const [clearButtonText, setClearText] = useState("Clear Markdown")
+  const [activeClear, setActiveClear] = useState(false)
 
   const handleEditorChange = (event) => {
     const newValue = event.target.value;
@@ -40,15 +43,21 @@ export default function Home() {
 
   const loadMarkdown = (event) => { };
 
-  let activeClear = false;
-
-  const clearMarkdown = (event) => {
+  const clearMarkdown = () => {
     if (activeClear) {
       setEditorText("");
-      activeClear = false;
+
+      setClearColour("#3D444D");
+      setClearText("Clear Markdown");
+
+      setActiveClear(false);
+      return;
     }
 
-    activeClear = true;
+    setClearColour("#F28260");
+    setClearText("Confirm Clear?");
+
+    setActiveClear(true)
   };
 
   return (
@@ -75,8 +84,9 @@ export default function Home() {
             >Load Markdown</button>
           </div>
           <button
+            style={{ backgroundColor: clearButtonColour }}
             onClick={clearMarkdown}
-          >Clear Markdown</button>
+          >{clearButtonText}</button>
         </div>
       </div>
     </div>
