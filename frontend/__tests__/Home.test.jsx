@@ -8,4 +8,10 @@ describe("Markdown Editor", () => {
     const textarea = screen.getByPlaceholderText("Enter markdown here");
     expect(textarea).toBeInTheDocument();
   });
+
+  test("renders the heading element", () => {
+    render(<Home />);
+    const heading = screen.getByText("GoodMark");
+    expect(heading).toBeInTheDocument();
+  });
 });
