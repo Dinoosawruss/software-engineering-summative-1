@@ -38,7 +38,7 @@ export default function Home() {
       });
       setRenderedText(response.data.html); // Set the raw HTML
     } catch (error) {
-      console.error("Error rendering markdown:", error);
+      console.error("Error rendering Markdown:", error);
     }
   };
 
@@ -50,7 +50,7 @@ export default function Home() {
         saveLink();
       }
     } catch (error) {
-      console.error("Error saving markdown:", error);
+      console.error("Error saving Markdown file:", error);
     }
   };
 
@@ -81,7 +81,28 @@ export default function Home() {
     link.click();
   }
 
-  const loadMarkdown = (event) => { };
+  const loadMarkdown = async () => {
+    try {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = ".md,.txt";
+
+      input.onchange = () => {
+        const file = input.files[0];
+        const fileReader = new FileReader();
+
+        fileReader.onload = (event) => {
+          setEditorText(event.target.result);
+        };
+
+        fileReader.readAsText(file);
+      };
+
+      input.click();
+    } catch (error) {
+      console.error("Error loading Markdown file:", error);
+    }
+  };
 
   const setActiveClear = (value) => {
     setActiveClearValue(value);
