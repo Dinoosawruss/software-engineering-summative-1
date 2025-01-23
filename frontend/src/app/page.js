@@ -2,13 +2,13 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import { Courier_Prime } from 'next/font/google';
+import { Courier_Prime } from "next/font/google";
 
 const courierPrime = Courier_Prime({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-courier-prime',
-  weight: ['400']
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-courier-prime",
+  weight: ["400"]
 });
 
 export default function Home() {
@@ -42,7 +42,44 @@ export default function Home() {
     }
   };
 
-  const saveMarkdown = (event) => { };
+  const saveMarkdown = async () => {
+    try {
+      if (window.showSaveFilePicker) {
+        saveWindow();
+      } else {
+        saveLink();
+      }
+    } catch (error) {
+      console.error("Error saving markdown:", error);
+    }
+  };
+
+  const saveWindow = async () => {
+    const options = {
+      types: [
+        {
+          description: "Markdown File",
+          accept: { "text/markdown": [".md", ".txt"] }
+        }
+      ]
+    };
+
+    const handle = await window.showSaveFilePicker(options);
+
+    const writableStream = await handle.createWritable();
+    await writableStream.write(new Blob([editorText], { type: "text/markdown" }));
+
+    await writableStream.close();
+  }
+
+  const saveLink = () => {
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(new Blob([editorText], { type: "text/markdown" }));
+    link.download = "markdown.md";
+
+    link.click();
+  }
 
   const loadMarkdown = (event) => { };
 
