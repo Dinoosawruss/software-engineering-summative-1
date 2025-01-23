@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js Backend ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         cache-dependency-path: backend/package-lock.json
@@ -35,3 +35,19 @@ jobs:
       working-directory: ./backend
     - run: npm run lint
       working-directory: ./backend
+
+    - name: Use Node.js Frontend ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        cache-dependency-path: frontend/package-lock.json
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+      working-directory: ./frontend
+    - run: npm run build --if-present
+      working-directory: ./frontend
+    # - run: npm test
+    #   working-directory: ./frontend
+    # Active bug with eslint https://github.com/eslint/eslint/issues/19322 - we will have to accept no linting for now
+    # - run: npm run lint
+    #   working-directory: ./frontend
