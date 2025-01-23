@@ -19,6 +19,7 @@ export default function Home() {
   const [clearConfirmClass, setClearConfirmClass] = useState("noConfirm");
   const [clearButtonText, setClearText] = useState("Clear Markdown");
   const [activeClear, setActiveClearValue] = useState(false);
+  const [clearAria, setClearAria] = useState("Clear the current Markdown content");
   const [fonts, setFonts] = useState([]);
   const [selectedFont, setSelectedFont] = useState("\"Courier Prime\" monospace");
   const [currentIcon, setCurrentIcon] = useState("darkMode.svg");
@@ -167,12 +168,14 @@ export default function Home() {
     if (value) {
       setClearConfirmClass("confirm");
       setClearText("Confirm Clear?");
+      setClearAria("Confirm that the Markdown content should be cleared");
 
       return;
     }
 
     setClearConfirmClass("noConfirm");
     setClearText("Clear Markdown");
+    setClearAria("Clear the current Markdown content");
   };
 
   const clearMarkdown = () => {
@@ -202,7 +205,10 @@ export default function Home() {
           alt="Icon showing the current dark/light mode setting"
           width="32"
           height="32"
-          onClick={toggleTheme} />
+          onClick={toggleTheme}
+          aria-label="Toggle the theme between dark and light mode"
+          tabIndex="1"
+        />
         <strong><u>GoodMark</u></strong>
       </h1>
       <div className="container">
@@ -215,8 +221,14 @@ export default function Home() {
           style={fontStyle}
           placeholder="Enter markdown here"
           data-testid="markdown-editor"
+          aria-label="Area to edit Markdown input"
         />
-        <div className="preview textzone" style={fontStyle} data-testid="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedText }} />
+        <div className="preview textzone"
+          style={fontStyle} data-testid="markdown-preview"
+          dangerouslySetInnerHTML={{ __html: renderedText }}
+          aria-live="polite"
+          aria-atomic="true"
+        />
         <div className="buttonContainer">
           <div className="mainButtons">
             <select
@@ -229,23 +241,32 @@ export default function Home() {
               }}
               value={selectedFont}
               style={fontStyle}
+              aria-label="Select a font"
             >
               {fonts.map((font) => (
-                <option data-testid="font-selector-option" key={font.value} value={font.value}>
+                <option
+                  data-testid="font-selector-option"
+                  key={font.value}
+                  value={font.value}
+                  aria-label={`Select ${font.name} font`}
+                >
                   {font.name}
                 </option>
               ))}
             </select>
             <button
               onClick={saveMarkdown}
+              aria-label="Save te current Markdown to a file"
             >Save Markdown</button>
             <button
               onClick={loadMarkdown}
+              aria-label="Load a Markdown file from your file system"
             >Load Markdown</button>
           </div>
           <button
             className={clearConfirmClass}
             onClick={clearMarkdown}
+            aria-label={clearAria}
           >{clearButtonText}</button>
         </div>
       </div>
