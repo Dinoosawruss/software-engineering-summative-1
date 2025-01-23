@@ -1,5 +1,5 @@
 import Home from "../src/app/page";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import React from "react";
 import axios from "axios";
 
@@ -291,7 +291,7 @@ describe("Markdown Editor", () => {
     });
   });
 
-  test("that a font selection dropdown is rendered", async () => {
+  test("that the font selector dropdown is populated with fonts", async () => {
     axios.get.mockResolvedValue({
       data: [
         { value: "Courier_Prime", name: "Courier Prime" },
@@ -300,18 +300,16 @@ describe("Markdown Editor", () => {
       ],
     });
 
-    render(<Home />);
-
-    await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith("undefined/fonts");
+    await act(async () => {
+      render(<Home />);
     });
+
+    expect(axios.get).toHaveBeenCalledWith("undefined/fonts");
 
     const fontSelector = screen.getByTestId("font-selector");
     expect(fontSelector).toBeInTheDocument();
 
-    expect(fontSelector).toBe("a")
-
-    const fontOptions = fontSelectorgetAllByTestId("font-selector-option");
+    const fontOptions = screen.getAllByTestId("font-selector-option");
     expect(fontOptions).toHaveLength(3);
 
     expect(fontOptions[0]).toHaveTextContent("Courier Prime");
