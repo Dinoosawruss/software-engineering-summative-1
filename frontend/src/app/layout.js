@@ -1,3 +1,4 @@
+import "prismjs/themes/prism.css";
 import "./globals.css";
 
 

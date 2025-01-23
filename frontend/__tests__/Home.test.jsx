@@ -2,6 +2,7 @@ import Home from "../src/app/page";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import axios from "axios";
+import Prism from "prismjs";
 
 jest.mock("axios");
 
@@ -52,7 +53,7 @@ describe("Markdown Editor", () => {
 
     await waitFor(() => {
       console.log("Mock axios calls:", axios.post.mock.calls);
-      expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/render", {
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
         markdown: "Hello",
       });
 
@@ -77,7 +78,7 @@ describe("Markdown Editor", () => {
 
     await waitFor(() => {
       console.log("Mock axios calls:", axios.post.mock.calls);
-      expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/render", {
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
         markdown: "# Hello\n\n**This text is bold**",
       });
 
@@ -116,7 +117,7 @@ describe("Markdown Editor", () => {
     fireEvent.change(textarea, { target: { value: "Malicious" } });
 
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/render", {
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
         markdown: "Malicious",
       });
 
@@ -205,5 +206,83 @@ describe("Markdown Editor", () => {
     fireEvent.change(textarea, { target: { value: "123" } });
     expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
     expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
+  });
+
+  test("that highlighted syntax is rendered for JavaScript code blocks", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: "<highlighted>console.log('Hello');</highlighted>",
+      },
+    });
+
+    render(<Home />);
+
+    const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
+
+    fireEvent.change(textarea, {
+      target: { value: "```javascript\nconsole.log('Hello');\n```" },
+    });
+
+    await waitFor(() => {
+      console.log("Mock axios calls:", axios.post.mock.calls);
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
+        markdown: "```javascript\nconsole.log('Hello');\n```",
+      });
+
+      expect(preview.innerHTML).toContain("<highlighted>console.log('Hello');</highlighted>");
+    });
+  });
+
+  test("that highlighted syntax is rendered for Python code blocks", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: "<highlighted>print('Hello')</highlighted>",
+      },
+    });
+
+    render(<Home />);
+
+    const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
+
+    fireEvent.change(textarea, {
+      target: { value: "```python\nprint('Hello');\n```" },
+    });
+
+    await waitFor(() => {
+      console.log("Mock axios calls:", axios.post.mock.calls);
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
+        markdown: "```python\nprint('Hello');\n```",
+      });
+
+      expect(preview.innerHTML).toContain("<highlighted>print('Hello')</highlighted>");
+    });
+  });
+
+  test("that plaintext is rendered for unsupported languages", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: "<highlighted>Some text</highlighted>",
+      },
+    });
+
+    render(<Home />);
+
+    const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
+
+    fireEvent.change(textarea, {
+      target: { value: "```unknown\nSome text\n```" },
+    });
+
+    await waitFor(() => {
+      console.log("Mock axios calls:", axios.post.mock.calls);
+      expect(axios.post).toHaveBeenCalledWith("undefined/render", {
+        markdown: "```unknown\nSome text\n```",
+      });
+
+      expect(preview.innerHTML).toContain("<highlighted>Some text</highlighted>");
+    });
   });
 });
