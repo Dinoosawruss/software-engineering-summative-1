@@ -1,6 +1,9 @@
 import Home from "../src/app/page";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
+import axios from 'axios';
+
+jest.mock("axios");
 
 describe("Markdown Editor", () => {
   test("that the page renders the textarea element", () => {
@@ -28,14 +31,54 @@ describe("Markdown Editor", () => {
     expect(textarea.value).toBe("# Hello");
   });
 
-  test("that the Markdown preview is displayed when Markdown is entered in the textarea", () => {
+  test("that Markdown the preview area is updated when text is entered", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: '<p>Hello</p>',
+      },
+    });
+
     render(<Home />);
     const textarea = screen.getByTestId("markdown-editor");
-    const preview = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
 
     expect(preview).toHaveTextContent("");
 
     fireEvent.change(textarea, { target: { value: "Hello" } });
-    expect(preview).toHaveTextContent("Hello");
+
+    await waitFor(() => {
+      console.log("Mock axios calls:", axios.post.mock.calls);
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:5000/render', {
+        markdown: 'Hello',
+      });
+
+      expect(preview.innerHTML).toContain("<p>Hello</p>");
+    })
+  });
+
+  test("that Markdown formatting is displayed in Markdown preview when Markdown is entered in the textarea", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: '<h1>Hello</h1><p><strong>This text is bold</strong></p>',
+      },
+    });
+
+    render(<Home />);
+    const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
+
+    expect(preview).toHaveTextContent("");
+
+    fireEvent.change(textarea, { target: { value: "# Hello\n\n**This text is bold**" } });
+
+    await waitFor(() => {
+      console.log("Mock axios calls:", axios.post.mock.calls);
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:5000/render', {
+        markdown: '# Hello\n\n**This text is bold**',
+      });
+
+      expect(preview.innerHTML).toContain("<h1>Hello</h1>");
+      expect(preview.innerHTML).toContain("<strong>This text is bold</strong>");
+    })
   });
 });
