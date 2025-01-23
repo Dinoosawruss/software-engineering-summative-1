@@ -9,6 +9,12 @@ describe("Markdown Editor", () => {
     expect(textarea).toBeInTheDocument();
   });
 
+  test("renders the preview area", () => {
+    render(<Home />);
+    const heading = screen.getByTestId("markdown-preview");
+    expect(heading).toBeInTheDocument();
+  });
+
   test("renders the heading element", () => {
     render(<Home />);
     const heading = screen.getByText("GoodMark");
