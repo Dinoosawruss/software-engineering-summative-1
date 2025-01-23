@@ -13,6 +13,10 @@ export default function Home() {
   };
 
   const handleRender = async () => {
+    if (editorText == "") {
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/render', {
         markdown: editorText,
