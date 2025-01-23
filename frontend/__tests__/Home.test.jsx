@@ -285,4 +285,28 @@ describe("Markdown Editor", () => {
       expect(preview.innerHTML).toContain("<highlighted>Some text</highlighted>");
     });
   });
+
+  test("that a font selection dropdown is rendered", async () => {
+    axios.get.mockResolvedValue({
+      data: [
+        { value: "Courier_Prime", name: "Courier Prime" },
+        { value: "Arial", name: "Arial" },
+        { value: "Roboto", name: "Roboto" },
+      ],
+    });
+
+    render(<Home />);
+
+    await waitFor(() => screen.getByLabelText(/choose a font/i));
+
+    const fontSelector = screen.getByLabelText(/choose a font/i);
+    expect(fontSelector).toBeInTheDocument();
+
+    const fontOptions = screen.getAllByRole("option");
+    expect(fontOptions).toHaveLength(3);
+
+    expect(fontOptions[0]).toHaveTextContent("Courier Prime");
+    expect(fontOptions[1]).toHaveTextContent("Arial");
+    expect(fontOptions[2]).toHaveTextContent("Roboto");
+  });
 });
