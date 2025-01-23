@@ -124,4 +124,22 @@ describe("Markdown Editor", () => {
       expect(preview.innerHTML).not.toContain("onerror");
     });
   });
+
+  test("that the page renders the Save Markdown button", () => {
+    render(<Home />);
+    const saveMarkdown = screen.getByText("Save Markdown");
+    expect(saveMarkdown).toBeInTheDocument();
+  });
+
+  test("that the page renders the Load Markdown button", () => {
+    render(<Home />);
+    const loadMarkdown = screen.getByText("Load Markdown");
+    expect(loadMarkdown).toBeInTheDocument();
+  });
+
+  test("that the page renders the Clear Markdown button", () => {
+    render(<Home />);
+    const clearMarkdown = screen.getByText("Clear Markdown");
+    expect(clearMarkdown).toBeInTheDocument();
+  });
 });
