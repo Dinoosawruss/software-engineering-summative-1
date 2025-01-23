@@ -38,8 +38,14 @@ export default function Home() {
     }
   };
 
+  const saveMarkdown = (event) => { };
+
+  const loadMarkdown = (event) => { };
+
+  const clearMarkdown = (event) => { };
+
   return (
-    <div>
+    <div className="main">
       <h1 className="goodmark"><strong><u>GoodMark</u></strong></h1>
       <div className="container">
         <textarea
@@ -52,6 +58,19 @@ export default function Home() {
           data-testid="markdown-editor"
         />
         <div className="preview textzone" data-testid="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedText }} />
+        <div className="buttonContainer">
+          <div className="mainButtons">
+            <button
+              onClick={saveMarkdown}
+            >Save Markdown</button>
+            <button
+              onClick={loadMarkdown}
+            >Load Markdown</button>
+          </div>
+          <button
+            onClick={clearMarkdown}
+          >Clear Markdown</button>
+        </div>
       </div>
     </div>
   );
