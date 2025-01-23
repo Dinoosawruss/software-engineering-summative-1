@@ -142,4 +142,16 @@ describe("Markdown Editor", () => {
     const clearMarkdown = screen.getByText("Clear Markdown");
     expect(clearMarkdown).toBeInTheDocument();
   });
+
+  test("that the Clear Markdown button clears the text in the textarea", () => {
+    render(<Home />);
+    const clearMarkdown = screen.getByText("Clear Markdown");
+    const textarea = screen.getByTestId("markdown-editor");
+
+    fireEvent.change(textarea, { target: { value: "Hello" } });
+    expect(textarea.value).toBe("Hello");
+
+    fireEvent.click(clearMarkdown);
+    expect(textarea.value).toBe("");
+  });
 });
