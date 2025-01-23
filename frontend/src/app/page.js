@@ -42,8 +42,15 @@ export default function Home() {
 
   const loadMarkdown = (event) => { };
 
+  let activeClear = false;
+
   const clearMarkdown = (event) => {
-    setEditorText("");
+    if (activeClear) {
+      setEditorText("");
+      activeClear = false;
+    }
+
+    activeClear = true;
   };
 
   return (
