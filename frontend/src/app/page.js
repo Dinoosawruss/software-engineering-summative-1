@@ -40,7 +40,9 @@ export default function Home() {
 
   const loadMarkdown = (event) => { };
 
-  const clearMarkdown = (event) => { };
+  const clearMarkdown = (event) => {
+    setEditorText("");
+  };
 
   return (
     <div className="main">
