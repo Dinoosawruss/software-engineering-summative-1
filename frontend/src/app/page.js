@@ -7,11 +7,12 @@ export default function Home() {
     <div>
       <h1><strong><u>GoodMark</u></strong></h1>
       <textarea
-        class="textzone"
+        className="textzone"
         rows="10"
         cols="50"
         placeholder="Enter markdown here"
       />
+      <div data-testid="markdown-preview" className="textzone"/>
     </div>
   );
 }
