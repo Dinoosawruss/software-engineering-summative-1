@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Courier_Prime } from "next/font/google";
+import Prism from "prismjs";
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
@@ -36,7 +37,26 @@ export default function Home() {
       const response = await axios.post(`${backendUrl}/render`, {
         markdown,
       });
-      setRenderedText(response.data.html); // Set the raw HTML
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(response.data.html, "text/html");
+
+      try {
+        doc.querySelectorAll("code").forEach((block) => {
+          const languageClass = block.className.match(/language-(\w+)/);
+          let language = languageClass ? languageClass[1] : NaN;
+          const highlightedCode = Prism.highlight(
+            block.textContent,
+            Prism.languages[language],
+            language
+          );
+          block.innerHTML = highlightedCode;
+        });
+      } catch (err) {
+        setRenderedText(response.data.html);
+      }
+
+      setRenderedText(doc.body.innerHTML);
     } catch (error) {
       console.error("Error rendering Markdown:", error);
     }
