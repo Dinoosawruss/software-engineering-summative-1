@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
 
 export default function Home() {
-  const [editorText, setEditorText] = useState('');
-  const [renderedText, setRenderedText] = useState('');
+  const [editorText, setEditorText] = useState("");
+  const [renderedText, setRenderedText] = useState("");
 
   const handleEditorChange = (event) => {
     const newValue = event.target.value;
@@ -19,12 +19,12 @@ export default function Home() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/render', {
+      const response = await axios.post("http://localhost:5000/render", {
         markdown,
       });
       setRenderedText(response.data.html); // Set the raw HTML
     } catch (error) {
-      console.error('Error rendering markdown:', error);
+      console.error("Error rendering markdown:", error);
     }
   };
 
