@@ -182,15 +182,15 @@ describe("Markdown Editor", () => {
     const textarea = screen.getByTestId("markdown-editor");
 
     fireEvent.change(textarea, { target: { value: "Hello" } });
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
+    expect(clearMarkdown.className).toContain("noConfirm");
     expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
 
     fireEvent.click(clearMarkdown);
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(242, 130, 96)");
+    expect(clearMarkdown.className).toContain("confirm");
     expect(clearMarkdown.innerHTML).toBe("Confirm Clear?");
 
     fireEvent.click(clearMarkdown);
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
+    expect(clearMarkdown.className).toContain("noConfirm");
     expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
   });
 
@@ -201,15 +201,15 @@ describe("Markdown Editor", () => {
 
     fireEvent.change(textarea, { target: { value: "Hello" } });
 
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
+    expect(clearMarkdown.className).toContain("noConfirm");
     expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
 
     fireEvent.click(clearMarkdown);
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(242, 130, 96)");
+    expect(clearMarkdown.className).toContain("confirm");
     expect(clearMarkdown.innerHTML).toBe("Confirm Clear?");
 
     fireEvent.change(textarea, { target: { value: "123" } });
-    expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
+    expect(clearMarkdown.className).toContain("noConfirm");
     expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
   });
 
