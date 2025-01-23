@@ -169,4 +169,19 @@ describe("Markdown Editor", () => {
     fireEvent.click(clearMarkdown);
     expect(textarea.value).toBe("Hello");
   });
+
+  test("that the Clear Markdown button background colour changes on first click and returns after clear", () => {
+    render(<Home />);
+    const clearMarkdown = screen.getByText("Clear Markdown");
+    const textarea = screen.getByTestId("markdown-editor");
+
+    fireEvent.change(textarea, { target: { value: "Hello" } });
+
+    expect(clearMarkdown.style.backgroundColor).toBe("rgb(61, 68, 77)");
+    expect(clearMarkdown.innerHTML).toBe("Clear Markdown");
+
+    fireEvent.click(clearMarkdown);
+    expect(clearMarkdown.style.backgroundColor).toBe("rgb(242, 130, 96)");
+    expect(clearMarkdown.innerHTML).toBe("Confirm Clear?");
+  });
 });
