@@ -8,20 +8,20 @@ export default function Home() {
   const [renderedText, setRenderedText] = useState('');
 
   const handleEditorChange = (event) => {
-    setEditorText(event.target.value);
-    handleRender();
+    const newValue = event.target.value;
+    setEditorText(newValue); // Update the state
+    handleRender(newValue);  // Call the function with the latest value
   };
 
-  const handleRender = async () => {
-    if (editorText == "") {
+  const handleRender = async (markdown) => {
+    if (!markdown) {
       return;
     }
 
     try {
       const response = await axios.post('http://localhost:5000/render', {
-        markdown: editorText,
+        markdown,
       });
-      console.log(response.data); // Log the API response
       setRenderedText(response.data.html); // Set the raw HTML
     } catch (error) {
       console.error('Error rendering markdown:', error);
