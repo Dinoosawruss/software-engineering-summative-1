@@ -131,7 +131,7 @@ ol li:before {
 }
 
 code {
-  background: #656C76;
+  background: #656C76 !important;
   width: 100%;
   display: block;
   padding: 10px;
