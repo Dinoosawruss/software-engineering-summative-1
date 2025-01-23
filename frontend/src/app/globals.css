@@ -163,10 +163,16 @@ blockquote {
   padding: 1vh;
 }
 
-button {
+button, select {
   width: 100%;
   padding: 1vh;
-  margin-top: 3vh;
+  margin-bottom: 3vh;
   font-size: 20px;
-  font-family: "Courier Prime", monosapce;
+  font-family: "Courier Prime", monospace;
+}
+
+select {
+  background-color: var(--interactable-background);
+  font-family: "Courier Prime", monospace;
+  text-align: center;
 }

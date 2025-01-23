@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Courier_Prime } from "next/font/google";
 import Prism from "prismjs";
 
@@ -16,10 +16,26 @@ export default function Home() {
   const [editorText, setEditorText] = useState("");
   const [renderedText, setRenderedText] = useState("");
   const [clearButtonColour, setClearColour] = useState("#3D444D");
-  const [clearButtonText, setClearText] = useState("Clear Markdown")
-  const [activeClear, setActiveClearValue] = useState(false)
+  const [clearButtonText, setClearText] = useState("Clear Markdown");
+  const [activeClear, setActiveClearValue] = useState(false);
+  const [fonts, setFonts] = useState([]);
+  const [selectedFont, setSelectedFont] = useState("\"Courier Prime\" monospace");
+
+  const fontStyle = selectedFont ? { fontFamily: `${selectedFont}` } : {};
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  useEffect(() => {
+    const fetchFonts = async () => {
+      try {
+        const response = await axios.get(`${backendUrl}/fonts`);
+        setFonts(response.data);
+      } catch (error) {
+        console.error("Error fetching fonts:", error);
+      }
+    };
+    fetchFonts();
+  }, [backendUrl]);
 
   const handleEditorChange = (event) => {
     const newValue = event.target.value;
@@ -163,12 +179,30 @@ export default function Home() {
           onChange={handleEditorChange}
           rows="10"
           cols="50"
+          style={fontStyle}
           placeholder="Enter markdown here"
           data-testid="markdown-editor"
         />
-        <div className="preview textzone" data-testid="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedText }} />
+        <div className="preview textzone" style={fontStyle} data-testid="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedText }} />
         <div className="buttonContainer">
           <div className="mainButtons">
+            <select
+              id="fontSelector"
+              onChange={(e) => {
+                console.log(e.target.value);
+                setSelectedFont(e.target.value);
+                console.log(selectedFont)
+              }
+              }
+              value={selectedFont}
+              style={fontStyle}
+            >
+              {fonts.map((font) => (
+                <option key={font.value} value={font.value}>
+                  {font.name}
+                </option>
+              ))}
+            </select>
             <button
               onClick={saveMarkdown}
             >Save Markdown</button>
