@@ -2,13 +2,18 @@ import Home from "../src/app/page";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import axios from "axios";
-import Prism from "prismjs";
 
 jest.mock("axios");
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
+
+window.matchMedia = jest.fn().mockImplementation(query => ({
+  matches: query === '(prefers-color-scheme: dark)',
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+}));
 
 describe("Markdown Editor", () => {
   test("that the page renders the textarea element", () => {
@@ -297,16 +302,28 @@ describe("Markdown Editor", () => {
 
     render(<Home />);
 
-    await waitFor(() => screen.getByLabelText(/choose a font/i));
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith("undefined/fonts");
+    });
 
-    const fontSelector = screen.getByLabelText(/choose a font/i);
+    const fontSelector = screen.getByTestId("font-selector");
     expect(fontSelector).toBeInTheDocument();
 
-    const fontOptions = screen.getAllByRole("option");
+    expect(fontSelector).toBe("a")
+
+    const fontOptions = fontSelectorgetAllByTestId("font-selector-option");
     expect(fontOptions).toHaveLength(3);
 
     expect(fontOptions[0]).toHaveTextContent("Courier Prime");
     expect(fontOptions[1]).toHaveTextContent("Arial");
     expect(fontOptions[2]).toHaveTextContent("Roboto");
+  });
+
+  test("loads with the correct theme based on system preference", () => {
+    render(<Home />);
+
+    const rootElement = document.documentElement;
+
+    expect(rootElement).toHaveAttribute('data-theme', 'dark');
   });
 });
