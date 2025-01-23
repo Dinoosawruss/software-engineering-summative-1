@@ -15,6 +15,17 @@
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 95vh;
+  width: 100vw;
+  padding: 20px;
+  gap: 20px;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -23,8 +34,105 @@ body {
 
 .textzone {
   background: var(--interactable-background);
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  font-family: "Courier Prime", monospace;
+  font-size: 20px;
+}
+
+.preview {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  background: var(--interactable-background);;
+  overflow-y: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-family: "Courier Prime", monospace;
+  font-size: 20px;
+  white-space: pre-wrap;
+}
+
+textarea:focus, .preview:focus {
+  outline: none;
 }
 
 button {
   background: var(--interactable-background);
+}
+
+.goodmark {
+  font-family: "Courier Prime", monospace;
+  font-size: 32px;
+  margin-left: 1vw;
+}
+
+h1 {
+  font-size: 26px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+h5 {
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 18px;
+}
+
+a {
+  color: #1CD2E7;
+}
+
+a:visited {
+  color: #1c96e7;
+}
+
+a:hover {
+  color: #1ce7d6;
+}
+
+ul {
+  padding-left: 1vw;
+  list-style-type: circle;
+}
+
+ol {
+  padding-left: 1vw;
+  counter-reset: item;
+}
+ol li:before {
+  content: counter(item) ". ";
+  counter-increment: item;
+}
+
+code {
+  background: #656C76;
+  width: 100%;
+  display: block;
+  padding: 10px;
+}
+
+blockquote {
+  padding-left: 1vw;
+  border-left: 1px #656C76;
+  border-style: solid;
 }
