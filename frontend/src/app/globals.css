@@ -1,5 +1,4 @@
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 :root {
@@ -13,6 +12,13 @@
     --foreground: #FFFFFF;
     --interactable-background: #3D444D;
   }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 100%;
 }
 
 .container {
@@ -29,12 +35,12 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Courier Prime", serif;
+  font-family: "Courier Prime", monospace;
 }
 
 .textzone {
   background: var(--interactable-background);
-  width: 50%;
+  width: 100%;
   height: 100%;
   padding: 10px;
   font-family: "Courier Prime", monospace;
@@ -42,7 +48,7 @@ body {
 }
 
 .preview {
-  width: 50%;
+  width: 100%;
   height: 100%;
   padding: 10px;
   background: var(--interactable-background);;
@@ -135,4 +141,32 @@ blockquote {
   padding-left: 1vw;
   border-left: 1px #656C76;
   border-style: solid;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 95vh;
+  width: 33%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.mainButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1vh;
+}
+
+button {
+  width: 100%;
+  padding: 1vh;
+  margin-top: 3vh;
+  font-size: 20px;
+  font-family: "Courier Prime", monosapce;
 }
