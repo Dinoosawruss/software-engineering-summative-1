@@ -11,6 +11,7 @@ export default function Home() {
         rows="10"
         cols="50"
         placeholder="Enter markdown here"
+        data-testid="markdown-editor"
       />
       <div data-testid="markdown-preview" className="textzone"/>
     </div>
