@@ -15,6 +15,8 @@ export default function Home() {
   const [editorText, setEditorText] = useState("");
   const [renderedText, setRenderedText] = useState("");
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleEditorChange = (event) => {
     const newValue = event.target.value;
     setEditorText(newValue); // Update the state
@@ -27,7 +29,7 @@ export default function Home() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/render", {
+      const response = await axios.post(`${backendUrl}/render`, {
         markdown,
       });
       setRenderedText(response.data.html); // Set the raw HTML
