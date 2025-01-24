@@ -25,6 +25,7 @@ export default function EditorPage() {
   const [selectedFont, setSelectedFont] = useState("\"Courier Prime\" monospace");
   const [currentIcon, setCurrentIcon] = useState("darkMode.svg");
   const [isDarkMode, setIsDarkMode] = useState(true);
+  let [hasRunYet, setHasRunYet] = useState(false);
 
   const fontStyle = selectedFont ? { fontFamily: `${selectedFont}` } : {};
 
@@ -73,6 +74,14 @@ export default function EditorPage() {
     handleRender(newValue);  // Call the function with the latest value
     resetClearMarkdown(); // Reset the clear confirmation back to false
   };
+
+  useEffect(() => {
+    console.log(localStorage.getItem("markdown"));
+    if (localStorage.getItem("markdown")) {
+      handleEditorChange(localStorage.getItem("markdown"));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleRender = async (markdown) => {
     if (!markdown) {
@@ -238,13 +247,6 @@ export default function EditorPage() {
     setSelectedFont(newFont);
     localStorage.setItem("selected-font", newFont);
   };
-
-  useEffect(() => {
-    console.log(localStorage.getItem("markdown"));
-    if (localStorage.getItem("markdown")) {
-      handleEditorChange(localStorage.getItem("markdown"));
-    }
-  });
 
   return (
     <div className="main">
