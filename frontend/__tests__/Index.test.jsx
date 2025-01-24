@@ -76,4 +76,12 @@ describe("IndexPage", () => {
         await waitFor(() => expect(mockPush).toHaveBeenCalledWith('/editor'));
         expect(localStorage.setItem).toHaveBeenCalledWith('hasVisitedBefore', 'true');
     });
+
+    test("loads with the correct theme based on system preference", () => {
+        render(<IndexPage />);
+
+        const rootElement = document.documentElement;
+
+        expect(rootElement).toHaveAttribute('data-theme', 'dark');
+    });
 });
