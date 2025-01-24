@@ -7,6 +7,12 @@ jest.mock("next/navigation", () => ({
     useRouter: jest.fn(),
 }));
 
+window.matchMedia = jest.fn().mockImplementation(query => ({
+    matches: query === "(prefers-color-scheme: dark)",
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+}));
+
 beforeEach(() => {
     localStorage.clear();
     jest.clearAllMocks();
@@ -47,22 +53,22 @@ describe("IndexPage", () => {
         const button = screen.getByRole("button", { name: /Start Editing/i });
         fireEvent.click(button);
 
-        await waitFor(() => expect(mockPush).toHaveBeenCalledWith('/editor'));
+        await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/editor"));
     });
 
-    it('should redirect to /editor if user has visited before', async () => {
+    it("should redirect to /editor if user has visited before", async () => {
         const mockPush = jest.fn();
-        localStorage.setItem('hasVisitedBefore', 'true');
+        localStorage.setItem("hasVisitedBefore", "true");
         useRouter.mockReturnValue({
             push: mockPush,
         });
 
         render(<IndexPage />);
 
-        await waitFor(() => expect(mockPush).toHaveBeenCalledWith('/editor'));
+        await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/editor"));
     });
 
-    it('should set localStorage and not redirect if user has not visited before', async () => {
+    it("should set localStorage and not redirect if user has not visited before", async () => {
         const mockPush = jest.fn();
         useRouter.mockReturnValue({
             push: mockPush,
@@ -73,8 +79,8 @@ describe("IndexPage", () => {
         const button = screen.getByRole("button", { name: /Start Editing/i });
         fireEvent.click(button);
 
-        await waitFor(() => expect(mockPush).toHaveBeenCalledWith('/editor'));
-        expect(localStorage.setItem).toHaveBeenCalledWith('hasVisitedBefore', 'true');
+        await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/editor"));
+        expect(localStorage.setItem).toHaveBeenCalledWith("hasVisitedBefore", "true");
     });
 
     test("loads with the correct theme based on system preference", () => {
@@ -82,6 +88,19 @@ describe("IndexPage", () => {
 
         const rootElement = document.documentElement;
 
-        expect(rootElement).toHaveAttribute('data-theme', 'dark');
+        expect(rootElement).toHaveAttribute("data-theme", "dark");
+    });
+
+    test("dark mode toggle should switch the page to light mode and update data-theme", () => {
+        render(<IndexPage />);
+
+        const themeToggle = screen.getByTestId("theme-toggle");
+
+        const rootElement = document.documentElement;
+        expect(rootElement).toHaveAttribute("data-theme", "dark");
+
+        fireEvent.click(themeToggle);
+
+        expect(rootElement).toHaveAttribute("data-theme", "light");
     });
 });
