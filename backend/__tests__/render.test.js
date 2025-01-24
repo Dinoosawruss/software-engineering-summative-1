@@ -41,7 +41,7 @@ describe("POST /render", () => {
             .send({ markdown: "![My Image](./image.png)" });
 
         expect(response.status).toBe(200);
-        expect(response.body.html).toContain("<img src=\"./image.png\" alt=\"My Image\">");
+        expect(response.body.html).toContain("<img src=\"./image.png\" alt=\"My Image\" />");
     });
 
     it("should return rendered HTML for valid Markdown further heading level inputs", async () => {
