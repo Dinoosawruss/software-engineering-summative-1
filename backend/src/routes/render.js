@@ -18,13 +18,17 @@ router.post("/",
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ error: "Markdown is required. Please send with { \"markdown\": {markdown} }", errors: errors.array() });
         }
 
         const { markdown } = req.body;
 
-        if (!markdown.trim()) {
-            return res.status(400).json({ error: "Markdown is required. Please send with { \"markdown\": {markdown} }" });
+        if (!markdown || !markdown.trim()) {
+            return res
+                .status(400)
+                .json({
+                    error: 'Markdown is required. Please send with { "markdown": {markdown} }',
+                });
         }
 
         const cacheKey = `markdown:${markdown}`
@@ -36,14 +40,23 @@ router.post("/",
 
         try {
             const rawHtml = marked.parse(markdown);
-            const sanitizedHtml = sanitizeHtml(rawHtml);
+            const sanitizedHtml = sanitizeHtml(rawHtml, {
+                allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+                allowedAttributes: {
+                    img: ["src", "alt"],
+                    a: ["href"],
+                },
+                allowedSchemes: ["http", "https", "data"],
+            });
 
             cache.set(cacheKey, sanitizedHtml);
 
             res.json({ html: sanitizedHtml });
         } catch (err) {
             logger.error(`Error rendereing Markdown: ${err.stack}`);
-            res.status(500).json({ error: `Error rendering Markdown: ${err.message}` });
+            res
+            .status(500)
+            .json({ error: `Error rendering Markdown: ${err.message}` });
         }
     })
 
