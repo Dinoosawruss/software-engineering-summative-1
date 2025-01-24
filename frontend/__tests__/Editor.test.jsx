@@ -99,6 +99,8 @@ describe("Markdown Editor", () => {
       },
     });
 
+    localStorage.clear();
+
     render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
 
