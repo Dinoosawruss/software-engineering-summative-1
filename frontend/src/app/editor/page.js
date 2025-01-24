@@ -54,18 +54,24 @@ export default function EditorPage() {
       setIsDarkMode(prefersDarkMode);
       localStorage.setItem("data-theme", prefersDarkMode ? "dark" : "light");
     }
+
+    setHasRunYet(true);
   }, []);
 
   useEffect(() => {
+    if (!hasRunYet) return;
+
     const root = document.documentElement;
     if (isDarkMode) {
       setCurrentIcon("darkMode.svg");
       root.setAttribute("data-theme", "dark");
+      localStorage.setItem("data-theme", "dark");
     } else {
       setCurrentIcon("lightMode.svg");
       root.setAttribute("data-theme", "light");
+      localStorage.setItem("data-theme", "light");
     }
-  }, [isDarkMode]);
+  }, [isDarkMode, hasRunYet]);
 
 
   const handleEditorChange = (newValue) => {
