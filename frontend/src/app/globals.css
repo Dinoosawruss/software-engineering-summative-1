@@ -13,22 +13,58 @@
   --interactable-background: #3D444D;
 }
 
+@media screen and (orientation: portrait) {
+  .main {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .buttonContainer, .mainButtons {
+    flex-direction: row;
+    justify-content: center !important;
+  }
+
+  button, select {
+    margin-left: 3vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .main {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-direction: row;
+  }
+
+  .buttonContainer, .mainButtons {
+    flex-direction: column;
+    height: 95vh;
+  }
+
+  button, select {
+    margin-bottom: 3vh;
+  }
+}
+
 .main {
   display: flex;
-  flex-direction: column;
   width: 100vw;
   max-width: 100%;
 }
 
 .container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   height: 95vh;
   width: 100vw;
-  padding: 20px;
-  gap: 20px;
+  padding: 1.25rem;
+  gap: 1.25rem;
 }
 
 body {
@@ -41,21 +77,21 @@ body {
   background: var(--interactable-background);
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 0.6rem;
   font-family: "Courier Prime", monospace;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .preview {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 0.6rem;
   background: var(--interactable-background);;
   overflow-y: auto;
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-family: "Courier Prime", monospace;
-  font-size: 20px;
+  font-size: 1.25rem;
   white-space: pre-wrap;
 }
 
@@ -74,7 +110,7 @@ button {
 
 .goodmark {
   font-family: "Courier Prime", monospace;
-  font-size: 32px;
+  font-size: 2rem;
   margin-left: 1vw;
   display: flex;
 }
@@ -84,24 +120,24 @@ button {
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 1.625rem;
   text-decoration: underline;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   text-decoration: underline;
   font-weight: bold;
 }
 
 h3 {
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: bold;
 }
 
 h4 {
-  font-size: 21px;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -110,7 +146,7 @@ h5 {
 }
 
 h6 {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 a {
@@ -143,7 +179,7 @@ code {
   background: #656C76 !important;
   width: 100%;
   display: block;
-  padding: 10px;
+  padding: 0.6rem;
 }
 
 blockquote {
@@ -154,29 +190,25 @@ blockquote {
 
 .buttonContainer {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 95vh;
   width: 33%;
-  padding: 20px;
-  gap: 20px;
+  padding: 1.25rem;
+  gap: 5rem;
 }
 
 .mainButtons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   width: 100%;
-  padding: 1vh;
+  gap: 1rem;
 }
 
 button, select {
   width: 100%;
   padding: 1vh;
-  margin-bottom: 3vh;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: "Courier Prime", monospace;
 }
 
