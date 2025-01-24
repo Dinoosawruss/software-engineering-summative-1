@@ -324,4 +324,17 @@ describe("Markdown Editor", () => {
 
     expect(rootElement).toHaveAttribute('data-theme', 'dark');
   });
+
+  test("dark mode toggle should switch the page to light mode and update data-theme", () => {
+    render(<EditorPage />);
+
+    const themeToggle = screen.getByTestId("theme-toggle");
+
+    const rootElement = document.documentElement;
+    expect(rootElement).toHaveAttribute("data-theme", "dark");
+
+    fireEvent.click(themeToggle);
+
+    expect(rootElement).toHaveAttribute("data-theme", "light");
+  });
 });

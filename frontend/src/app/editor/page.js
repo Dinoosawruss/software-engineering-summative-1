@@ -232,6 +232,7 @@ export default function EditorPage() {
           aria-controls="Press [Enter] or [Space] to toggle"
           tabIndex="0"
           onKeyDown={handleKeyPress}
+          data-testid="theme-toggle"
         />
         <strong><u>GoodMark</u></strong>
       </h1>
