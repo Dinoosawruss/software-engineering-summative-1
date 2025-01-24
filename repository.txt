@@ -1,0 +1,11 @@
+https://github.com/Dinoosawruss/software-engineering-summative-1
+
+A deployed version of the application is available here: https://software-engineering-summative-1-frontend.onrender.com/
+It will take a long time to load up as it will unload as I am on the free tier of Render and it will not be active but when you enter the link in your browser it will automatically deploy, and the backend will then automatically deploy when the frontend sends its first request.
+
+As discussed, I really struggled to stay in the word limit. I have provided 3 files:
+- README-no-word-cut - this is my original README as I wrote it
+- README-first-word-cut - this is my word cut down version that is still over the limit
+- README - this is the final version that is in the limit but with significant detail and sections removed
+
+I understand you may only be able to review the final one but.
