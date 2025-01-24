@@ -20,14 +20,14 @@
     "marked": "^15.0.6",
     "morgan": "^1.10.0",
     "sanitize-html": "^2.14.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
     "jest": "^29.7.0",
-    "node-cache": "^5.1.2",
     "nodemon": "^3.1.9",
     "supertest": "^7.0.0"
   }
