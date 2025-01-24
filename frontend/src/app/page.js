@@ -53,7 +53,7 @@ export default function IndexPage() {
   };
 
   return (
-    <div>
+    <div className="welcomeContainer">
       <Image
         src={currentIcon}
         alt="Icon showing the current dark/light mode setting"
@@ -64,12 +64,13 @@ export default function IndexPage() {
         tabIndex="0"
         onClick={toggleTheme}
         data-testid="theme-toggle"
+        className="darkModeIcon"
       />
-      <h1 className="goodmark">
+      <h1 className="goodmarkWelcome">
         <strong><u>GoodMark</u></strong>
       </h1>
-      <p>A lightweight, web-based Markdown editor</p>
-      <button onClick={handleClick}>Start Editing</button>
+      <p className="text">A lightweight, web-based Markdown editor</p>
+      <button onClick={handleClick} className="startButton">Start Editing</button>
     </div>
   );
 };
