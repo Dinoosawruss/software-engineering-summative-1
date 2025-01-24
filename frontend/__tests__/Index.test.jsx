@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import IndexPage from "../src/app/page";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-jest.mock("next/router", () => ({
+jest.mock("next/navigation", () => ({
     useRouter: jest.fn(),
 }));
 
