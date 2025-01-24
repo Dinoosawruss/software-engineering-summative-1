@@ -86,6 +86,7 @@ export default function EditorPage() {
 
   const handleRender = async (markdown) => {
     if (!markdown) {
+      setRenderedText();
       return;
     }
 
@@ -198,7 +199,7 @@ export default function EditorPage() {
 
   const clearMarkdown = () => {
     if (activeClear) {
-      setEditorText("");
+      handleEditorChange("");
 
       setActiveClear(false);
       return;
