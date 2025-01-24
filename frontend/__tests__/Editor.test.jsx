@@ -109,6 +109,21 @@ describe("Markdown Editor", () => {
     });
   });
 
+  test("that last Markdown entered is stored in local storage", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: "<h1>Hello</h1>",
+      },
+    });
+
+    render(<EditorPage />);
+    const textarea = screen.getByTestId("markdown-editor");
+
+    fireEvent.change(textarea, { target: { value: "# Hello" } });
+
+    expect(localStorage.getItem("markdown")).toBe("# Hello");
+  });
+
   test("that unsafe HTML is not rendered in the preview", async () => {
     const maliciousHTML = "<img src=\"x\" onerror=\"alert(\"Hacked!\")\" />";
     axios.post.mockResolvedValueOnce({
