@@ -32,7 +32,7 @@ describe("POST /render", () => {
             .send({ markdown: "```print('Hello World')```" });
 
         expect(response.status).toBe(200);
-        expect(response.body.html).toContain("<code>print(&#39;Hello World&#39;)</code>");
+        expect(response.body.html).toContain("<code>print('Hello World')</code>");
     });
 
     it("should return rendered HTML for valid Markdown image input", async () => {
@@ -122,7 +122,7 @@ describe("POST /render", () => {
             .send({ markdown: "---" });
 
         expect(response.status).toBe(200);
-        expect(response.body.html).toContain("<hr>");
+        expect(response.body.html).toContain("<hr />");
     });
 
     it("should return an error if no Markdown is supplied", async () => {

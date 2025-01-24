@@ -40,7 +40,7 @@ router.post("/",
 
             cache.set(cacheKey, sanitizedHtml);
 
-            res.json({ html: sanitizeHtml });
+            res.json({ html: sanitizedHtml });
         } catch (err) {
             logger.error(`Error rendereing Markdown: ${err.stack}`);
             res.status(500).json({ error: `Error rendering Markdown: ${err.message}` });
