@@ -18,6 +18,15 @@ export default function IndexPage() {
     router.push('/editor');
   }
 
+  useEffect(() => {
+    const hasVisitedBefore = localStorage.getItem("hasVisitedBefore");
+    if (hasVisitedBefore) {
+      router.push("/editor");
+    } else {
+      localStorage.setItem("hasVisitedBefore", "true");
+    }
+  }, [router]);
+
   return (
     <div>
       <Image
