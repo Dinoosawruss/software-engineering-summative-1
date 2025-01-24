@@ -101,6 +101,8 @@ describe("Markdown Editor", () => {
 
     localStorage.clear();
 
+    localStorage.setItem("markdown", "");
+
     render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
 

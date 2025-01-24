@@ -76,9 +76,10 @@ export default function EditorPage() {
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem("markdown"));
-    if (localStorage.getItem("markdown")) {
+    if (localStorage.hasOwnProperty("markdown")) {
       handleEditorChange(localStorage.getItem("markdown"));
+    } else {
+      handleEditorChange(sampleMarkdown);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -224,7 +225,7 @@ export default function EditorPage() {
     const handleGlobalKeyDown = (event) => {
       // Prevent default action for Ctrl/Cmd + S and Ctrl/Cmd + O
       if (event.ctrlKey || event.metaKey) {
-        if (event.key === "s") {
+        if (event.key === "s") {``
           event.preventDefault();
           saveMarkdown();
         } else if (event.key === "o") {
@@ -327,3 +328,38 @@ export default function EditorPage() {
     </div>
   );
 }
+
+const sampleMarkdown =
+`# Welcome to GoodMark Editor!
+
+This is a Markdown editor where you can edit and preview your content.
+
+## Features
+
+- **Real-time preview**
+- **Customizable fonts**
+- **Dark/Light mode toggle**
+
+### Markdown allows you to:
+
+1. **Create headings**: # for large headers, ## for medium headers, and ### for smaller ones.
+2. **Style text**: You can make text **bold**, *italic*, or even monospace for code (\`\`\`).
+3. **Write Code blocks**: Using \`\`\`, you can also specify a language on the first line for syntax highlighting. 
+
+    \`\`\`javascript
+    // Example of JavaScript code
+    function greet() {
+      console.log("Hello, World!");
+    }
+    \`\`\`
+
+4. **Add Links**: Such as [this one](https://google.com/) to Google
+
+5. **Add Images**:
+
+     ![Markdown Logo](https://cdn.commonmark.org/uploads/default/optimized/2X/3/366f3614de6996d79a131fdf9b41ed7d65cfe181_2_1024x630.png)
+
+---
+
+> GoodMark makes writing Markdown quick and easy
+`
