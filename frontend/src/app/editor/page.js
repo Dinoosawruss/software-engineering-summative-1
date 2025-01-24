@@ -235,6 +235,12 @@ export default function EditorPage() {
         }
       }
     }
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown);
+    };
   });
 
   useEffect(() => {
