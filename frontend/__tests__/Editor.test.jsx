@@ -192,6 +192,7 @@ describe("Markdown Editor", () => {
     render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     const textarea = screen.getByTestId("markdown-editor");
+    const preview = screen.getByTestId("markdown-preview");
 
     fireEvent.change(textarea, { target: { value: "Hello" } });
     expect(textarea.value).toBe("Hello");
@@ -201,6 +202,7 @@ describe("Markdown Editor", () => {
 
     fireEvent.click(clearMarkdown);
     expect(textarea.value).toBe("");
+    expect(preview.innerHTML).toBe("");
   });
 
   test("that the Clear Markdown button does not clear the text in the textarea if not confirmed", () => {
