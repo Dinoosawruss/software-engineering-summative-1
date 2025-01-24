@@ -226,6 +226,19 @@ export default function EditorPage() {
     }
   });
 
+  useEffect(() => {
+    const savedFont = localStorage.getItem("selected-font");
+    if (savedFont) {
+      setSelectedFont(savedFont);
+    }
+  }, []);
+
+  const handleFontChange = (event) => {
+    const newFont = event.target.value;
+    setSelectedFont(newFont);
+    localStorage.setItem("selected-font", newFont);
+  };
+
   return (
     <div className="main">
       <h1 className="goodmark">
@@ -266,9 +279,9 @@ export default function EditorPage() {
             <select
               id="fontSelector"
               data-testid="font-selector"
-              onChange={(e) => {
-                console.log(e.target.value);
-                setSelectedFont(e.target.value);
+              onChange={(event) => {
+                console.log(event.target.value);
+                handleFontChange(event);
                 console.log(selectedFont)
               }}
               value={selectedFont}
