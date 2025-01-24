@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     const fonts = [
         { name: "Courier Prime", value: "\"Courier Prime\", monospace" },
         { name: "Arial", value: "Arial" },
