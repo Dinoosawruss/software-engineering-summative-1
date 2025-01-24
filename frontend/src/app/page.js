@@ -10,7 +10,6 @@ export default function IndexPage() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.setAttribute('data-theme', 'dark');
   });
 
   const handleClick = () => {
