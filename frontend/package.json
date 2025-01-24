@@ -12,6 +12,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "transform": {
+      "^.+\\.css$": "jest-transform-stub",
       "^.+\\.[t|j]sx?$": [
         "@swc/jest",
         {
@@ -29,6 +30,9 @@
           }
         }
       ]
+    },
+    "moduleNameMapper": {
+      "\\.css$": "jest-transform-stub"
     },
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom"
@@ -53,6 +57,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "jest": "^29.7.0",
+    "jest-transform-stub": "^2.0.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }

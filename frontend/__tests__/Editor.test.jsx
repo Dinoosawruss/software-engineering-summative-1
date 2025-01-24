@@ -1,4 +1,4 @@
-import Home from "../src/app/page";
+import EditorPage from "../src/app/editor/page";
 import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import React from "react";
 import axios from "axios";
@@ -17,25 +17,25 @@ window.matchMedia = jest.fn().mockImplementation(query => ({
 
 describe("Markdown Editor", () => {
   test("that the page renders the textarea element", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
     expect(textarea).toBeInTheDocument();
   });
 
   test("that the page renders the preview area", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const preview = screen.getByTestId("markdown-preview");
     expect(preview).toBeInTheDocument();
   });
 
   test("that the page renders the heading element", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const heading = screen.getByText("GoodMark");
     expect(heading).toBeInTheDocument();
   });
 
   test("that the textarea can be typed in", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
     fireEvent.change(textarea, { target: { value: "# Hello" } });
     expect(textarea.value).toBe("# Hello");
@@ -48,7 +48,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
 
@@ -73,7 +73,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
 
@@ -99,7 +99,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
 
     fireEvent.change(textarea, { target: { value: "" } });
@@ -115,7 +115,7 @@ describe("Markdown Editor", () => {
       data: { html: maliciousHTML },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
 
@@ -132,25 +132,25 @@ describe("Markdown Editor", () => {
   });
 
   test("that the page renders the Save Markdown button", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const saveMarkdown = screen.getByText("Save Markdown");
     expect(saveMarkdown).toBeInTheDocument();
   });
 
   test("that the page renders the Load Markdown button", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const loadMarkdown = screen.getByText("Load Markdown");
     expect(loadMarkdown).toBeInTheDocument();
   });
 
   test("that the page renders the Clear Markdown button", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     expect(clearMarkdown).toBeInTheDocument();
   });
 
   test("that the Clear Markdown button clears the text in the textarea after confirmation", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     const textarea = screen.getByTestId("markdown-editor");
 
@@ -165,7 +165,7 @@ describe("Markdown Editor", () => {
   });
 
   test("that the Clear Markdown button does not clear the text in the textarea if not confirmed", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     const textarea = screen.getByTestId("markdown-editor");
 
@@ -177,7 +177,7 @@ describe("Markdown Editor", () => {
   });
 
   test("that the Clear Markdown button background colour changes on first click and returns after clear", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     const textarea = screen.getByTestId("markdown-editor");
 
@@ -195,7 +195,7 @@ describe("Markdown Editor", () => {
   });
 
   test("that the Clear Markdown button returns to Clear Markdown if textarea is edited", () => {
-    render(<Home />);
+    render(<EditorPage />);
     const clearMarkdown = screen.getByText("Clear Markdown");
     const textarea = screen.getByTestId("markdown-editor");
 
@@ -220,7 +220,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
 
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
@@ -246,7 +246,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
 
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
@@ -272,7 +272,7 @@ describe("Markdown Editor", () => {
       },
     });
 
-    render(<Home />);
+    render(<EditorPage />);
 
     const textarea = screen.getByTestId("markdown-editor");
     const preview = screen.getByTestId("markdown-preview");
@@ -301,7 +301,7 @@ describe("Markdown Editor", () => {
     });
 
     await act(async () => {
-      render(<Home />);
+      render(<EditorPage />);
     });
 
     expect(axios.get).toHaveBeenCalledWith("undefined/fonts");
@@ -318,7 +318,7 @@ describe("Markdown Editor", () => {
   });
 
   test("loads with the correct theme based on system preference", () => {
-    render(<Home />);
+    render(<EditorPage />);
 
     const rootElement = document.documentElement;
 

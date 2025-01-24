@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind utilities;
+
+@media screen and (orientation: portrait) {
+    .main {
+        flex-direction: column;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .buttonContainer,
+    .mainButtons {
+        flex-direction: row;
+        justify-content: center !important;
+    }
+
+    button,
+    select {
+        margin-left: 3vw;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .main {
+        flex-direction: column;
+    }
+
+    .container {
+        flex-direction: row;
+    }
+
+    .buttonContainer,
+    .mainButtons {
+        flex-direction: column;
+        height: 95vh;
+    }
+
+    button,
+    select {
+        margin-bottom: 3vh;
+    }
+}
+
+.main {
+    display: flex;
+    width: 100vw;
+    max-width: 100%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 95vh;
+    width: 100vw;
+    padding: 1.25rem;
+    gap: 1.25rem;
+}
+
+.textzone {
+    background: var(--interactable-background);
+    width: 100%;
+    height: 100%;
+    padding: 0.6rem;
+    font-family: "Courier Prime", monospace;
+    font-size: 1.25rem;
+}
+
+.preview {
+    width: 100%;
+    height: 100%;
+    padding: 0.6rem;
+    background: var(--interactable-background);
+    ;
+    overflow-y: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Courier Prime", monospace;
+    font-size: 1.25rem;
+    white-space: pre-wrap;
+}
+
+textarea:focus,
+.preview:focus {
+    outline: none;
+}
+
+.confirm {
+    background: #F28260 !important;
+}
+
+button {
+    background: var(--interactable-background);
+}
+
+.goodmark {
+    display: flex;
+    margin-left: 1vw;
+}
+
+.goodmark img {
+    margin-right: 1vw;
+}
+
+h1 {
+    font-size: 1.625rem;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.375rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+h5 {
+    font-weight: bold;
+}
+
+h6 {
+    font-size: 1.125rem;
+}
+
+a {
+    color: #1CD2E7;
+}
+
+a:visited {
+    color: #1c96e7;
+}
+
+a:hover {
+    color: #1ce7d6;
+}
+
+ul {
+    padding-left: 1vw;
+    list-style-type: circle;
+}
+
+ol {
+    padding-left: 1vw;
+    counter-reset: item;
+}
+
+ol li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+}
+
+code {
+    background: #656C76 !important;
+    width: 100%;
+    display: block;
+    padding: 0.6rem;
+}
+
+blockquote {
+    padding-left: 1vw;
+    border-left: 1px #656C76;
+    border-style: solid;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 33%;
+    padding: 1.25rem;
+    gap: 5rem;
+}
+
+.mainButtons {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;
+}
+
+button,
+select {
+    width: 100%;
+    padding: 1vh;
+    font-size: 1.25rem;
+    font-family: "Courier Prime", monospace;
+}
+
+select {
+    background-color: var(--interactable-background);
+    font-family: "Courier Prime", monospace;
+    text-align: center;
+}
