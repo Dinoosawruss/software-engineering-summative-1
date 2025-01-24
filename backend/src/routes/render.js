@@ -3,7 +3,7 @@ const marked = require("marked");
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const { markdown } = req.body;
 
     if (!markdown) {
