@@ -128,6 +128,26 @@ describe("Markdown Editor", () => {
     expect(localStorage.getItem("markdown")).toBe("# Hello");
   });
 
+  test("that the default Markdown is not used when markdown property is just empty", async () => {
+    axios.post.mockResolvedValueOnce({
+      data: {
+        html: "",
+      },
+    });
+
+    localStorage.clear();
+
+    localStorage.setItem("markdown", "");
+
+    render(<EditorPage />);
+    const textarea = screen.getByTestId("markdown-editor");
+
+    await waitFor(() => {
+      expect(axios.post).not.toHaveBeenCalled();
+      expect(textarea.value).toBe("");
+    });
+  });
+
   test("that unsafe HTML is not rendered in the preview", async () => {
     const maliciousHTML = "<img src=\"x\" onerror=\"alert(\"Hacked!\")\" />";
     axios.post.mockResolvedValueOnce({
