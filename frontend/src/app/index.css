@@ -8,21 +8,21 @@ body {
     margin-bottom: 1rem;
 }
 
-button {
+.startButton {
     padding: 0.75rem;
     padding-left: 3rem;
     padding-right: 3rem;
 }
 
-.goodmark {
+.goodmarkWelcome {
     font-size: 2rem;
 }
 
-.goodmark, p {
+.goodmarkWelcome, .text {
     margin-bottom: 1rem;
 }
 
-img {
+.darkModeIcon {
     margin: auto;
     margin-bottom: 1.5rem;
 }
