@@ -317,6 +317,28 @@ describe("Markdown Editor", () => {
     expect(fontOptions[2]).toHaveTextContent("Roboto");
   });
 
+  it("that the font selector should store the last selected font in localStorage", async () => {
+    axios.get.mockResolvedValue({
+      data: [
+        { value: "Courier_Prime", name: "Courier Prime" },
+        { value: "Arial", name: "Arial" },
+        { value: "Roboto", name: "Roboto" },
+      ],
+    });
+
+    await act(async () => {
+      render(<EditorPage />)
+    });
+
+    const fontSelector = screen.getByTestId("font-selector");
+
+    fireEvent.change(fontSelector, {
+      target: { value: "Arial" }
+    });
+
+    expect(localStorage.getItem("selected-font")).toBe("Arial");
+  });
+
   test("loads with the correct theme based on system preference", () => {
     render(<EditorPage />);
 
