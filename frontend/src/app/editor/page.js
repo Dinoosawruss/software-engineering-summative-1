@@ -364,7 +364,7 @@ This is a Markdown editor where you can edit and preview your content.
 
 5. **Add Images**:
 
-     ![Markdown Logo](https://cdn.commonmark.org/uploads/default/optimized/2X/3/366f3614de6996d79a131fdf9b41ed7d65cfe181_2_1024x630.png)
+    ![Markdown Logo](https://cdn.commonmark.org/uploads/default/optimized/2X/3/366f3614de6996d79a131fdf9b41ed7d65cfe181_2_1024x630.png)
 
 ---
 
