@@ -43,20 +43,20 @@ export default function EditorPage() {
   }, [backendUrl]);
 
   useEffect(() => {
-    setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, []);
 
   useEffect(() => {
     const root = document.documentElement;
     if (isDarkMode) {
       setCurrentIcon("darkMode.svg");
-      root.setAttribute('data-theme', 'dark');
+      root.setAttribute("data-theme", "dark");
     } else {
       setCurrentIcon("lightMode.svg");
-      root.setAttribute('data-theme', 'light');
+      root.setAttribute("data-theme", "light");
     }
 
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem("data-theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
 
@@ -199,7 +199,7 @@ export default function EditorPage() {
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       toggleTheme();
     }
   };
@@ -208,10 +208,10 @@ export default function EditorPage() {
     const handleGlobalKeyDown = (event) => {
       // Prevent default action for Ctrl/Cmd + S and Ctrl/Cmd + O
       if (event.ctrlKey || event.metaKey) {
-        if (event.key === 's') {
+        if (event.key === "s") {
           event.preventDefault();
           saveMarkdown();
-        } else if (event.key === 'o') {
+        } else if (event.key === "o") {
           event.preventDefault();
           loadMarkdown();
         }

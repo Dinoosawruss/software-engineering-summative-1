@@ -1,20 +1,42 @@
 "use client"
 
 import "./index.css";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function IndexPage() {
   const router = useRouter();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentIcon, setCurrentIcon] = useState("darkMode.svg");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("data-theme");
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === "dark");
+    } else {
+      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDarkMode(prefersDarkMode);
+      localStorage.setItem("data-theme", prefersDarkMode ? "dark" : "light");
+    }
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
-  });
+    if (isDarkMode) {
+      setCurrentIcon("darkMode.svg");
+      root.setAttribute("data-theme", "dark");
+    } else {
+      setCurrentIcon("lightMode.svg");
+      root.setAttribute("data-theme", "light");
+    }
+
+    localStorage.setItem("data-theme", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
   const handleClick = () => {
     console.log("h")
-    router.push('/editor');
+    router.push("/editor");
   }
 
   useEffect(() => {
@@ -26,16 +48,22 @@ export default function IndexPage() {
     }
   }, [router]);
 
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
   return (
     <div>
       <Image
-        src={"darkMode.svg"}
+        src={currentIcon}
         alt="Icon showing the current dark/light mode setting"
         width="32"
         height="32"
         aria-label="Toggle the theme between dark and light mode"
         aria-controls="Press [Enter] or [Space] to toggle"
         tabIndex="0"
+        onClick={toggleTheme}
+        data-testid="theme-toggle"
       />
       <h1 className="goodmark">
         <strong><u>GoodMark</u></strong>
