@@ -1,14 +1,22 @@
 "use client"
 
 import "./index.css";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import React, { useEffect } from "react";
 
 export default function IndexPage() {
+  const router = useRouter();
+
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-theme', 'dark');
   });
+
+  const handleClick = () => {
+    console.log("h")
+    router.push('/editor');
+  }
 
   return (
     <div>
@@ -25,7 +33,7 @@ export default function IndexPage() {
         <strong><u>GoodMark</u></strong>
       </h1>
       <p>A lightweight, web-based Markdown editor</p>
-      <button>Start Editing</button>
+      <button onClick={handleClick}>Start Editing</button>
     </div>
   );
 };
