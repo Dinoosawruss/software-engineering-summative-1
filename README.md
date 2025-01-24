@@ -1,40 +1,40 @@
 # GoodMark
 
-A simple web-tool to preview and edit markdown.
+Simple markdown preview and editing web-tool.
 
 ## Project Summary
 
-The purpose for this project is to create an easy to use lightweight Markdown previewing tool. This will allow users to edit and preview Markdown syntax in real-time, aiding those unfamiliar with markdown in proper use, and helping those familiar with markdown get the most out of it. The tool will simply the Markdown working process to ensure that it is accessible for all.
+This project aims to provide a simple, lightweight Markdown previewer. Users can change and preview Markdown syntax in real time, assisting beginners and experts alike. The program simplifies Markdown to make it accessible.
 
 ### Project Description
 
-GoodMark is a web-based application designed to simplify the Markdown writing process by transforming plain-text Markdown into rendered HTML in real-time. It will be a good utility for both those who want to experiment with how they might use Markdown and seasoned Markdown users hoping to use a light-weight Markdown tool that renders in real time without needing a full editor installed.
+GoodMark is a web-application that converts plain-text Markdown into rendered HTML in real time to facilitate Markdown writing. It will be useful for both beginners and experts who seek a lightweight Markdown tool that renders in real time without a complete editor.
 
-Key features:
-1. A real-time preview that dynamically updates as users type Markdown.
-2. Syntax highlighting in code snippets.
-3. A clean simple User Interface, see [User Interface Design](#user-interface) for more details.
-4. Both dark and light mode to suit your preferences.
+Main features:
+1. A live preview that updates as Markdown is typed.
+2. Code snippet syntax highlighting.
+3. A simple, clean user interface, see [User Interface Design](#user-interface).
+4. Dark and light modes for your convenience.
 
 ## Design
 
-There are several stages to designing what this project will look like and how the project will be built. In order to gain a vision of what I am creating I started with the User Interface design. I then went on to design the architecture of the Software and designed how I will go about implementing the Software.
+This project's design and construction involve multiple stages. I began with User Interface design to visualise my project. After designing the Software's architecture, I planned its implementation.
 
 ### User Interface
 
-The user interface design was created in Figma. The prototype for this design is available [here](https://www.figma.com/proto/Bkpb34iogKXZpO8ttmP5ef/GoodMark?node-id=1-5&p=f&t=YSk4zt3abM4z9aqy-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A5&show-proto-sidebar=1).
+The user interface design was created in Figma. The design prototype is [here](https://www.figma.com/proto/Bkpb34iogKXZpO8ttmP5ef/GoodMark?node-id=1-5&p=f&t=YSk4zt3abM4z9aqy-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A5&show-proto-sidebar=1).
 
 #### Product Design
 
 ##### GoodMark Welcome Screen
 
-When the user first opens the website, they should be greeted with a splash screen that will give them a brief overview of what the product is. This is similar to how many applications design their software. We see this significantly in video game design, where you would typically be presented with a game menu before being placed into the game. I felt that this was a good approach for this project as it would not overwhelm newer users with an immediate editing screen, and make them feel that they have a choice before entering the editor. I plan to use a cookie on the user's browser to track if they have visited the site and pressed the "Start Editing" button before, if they have, they will not be presented with the screen again unless they clear their cookies; this will avoid regular users having to continuously press the "Start Editing" button, whilst still giving newer users this choice splash screen. The user will also be able to select whether they wish to use light or dark mode on this screen, this will similarly be saved into a cookie on their browser - dark mode will be the default.
+The website should open with a splash screen that introduces the product. Similar to how many apps construct their software. The game menu before the game is typical in video game design. I liked this technique for this project because it didn't overwhelm new users with an immediate editing screen and gave them a choice before accessing the editor. I plan to use a cookie on the user's browser to track if they have visited the site and pressed the "Start Editing" button before. If they have, they will not be presented with the screen again unless they clear their cookies, avoiding regular users from repeating the process while still giving newer users this splash screen. The user can also choose between bright and dark mode on this screen, which will be recorded in a browser cookie. Dark mode will be the default.
 
 ![An image displaying the Welcome Screen for GoodMark. It shows a moon icon for selecting light/dark mode, the text "GoodMark" with "A lightweight, web-based Markdown editor" below it, and a button that says "Start Editing".](assets/readme-images/goodmark-welcome-screen.png)
 
 ##### Editor Screen
 
-Once the user selects the "Start Editing" button, or if they have visited the website before and have the cookie stored in their browser, they will be taken to the main Markdown editing screen. This screen will initially have some sample text if they have not edited before, if they have edited before, the last text they wrote will be populated into the textbox, similarly, stored in a cookie. The sample text will feature a heading, some normal text, and a code block to give the user an idea of the different Markdown options available to them. They will also have several options including a combo-box which will allow them to select a font from a pre-defined list, a "Save Markdown" button, allowing them to save a file to their machine containing their Markdown, and a "Load Markdown" button, allowing them to load any Markdown file from their machine into the text box. In the bottom right, there is a "Clear Markdown" button, this will allow the user to quickly clear their Markdown currently present, however, to avoid any accidental data losses it will prompt for confirmation first. Similarly to the welcome screen, they can also select light or dark mode on this screen with the icon in the top left.
+When the user clicks "Start Editing" or has visited the website before and stored the cookie in their browser, they are directed to the primary Markdown editing screen. If they have never modified, this screen will display sample text. If they have, the last text they entered will be populated into the textbox and kept in a cookie. The sample text will have a headline, normal text, and a code block to demonstrate Markdown alternatives. They will also have a combo-box to select a font from a pre-defined list, a "Save Markdown" button to save their Markdown to their machine, and a "Load Markdown" button to load any Markdown file from their machine into the text box. The "Clear Markdown" option in the bottom right allows users to easily remove their Markdown, although it prompts for approval to avoid unintentional data loss. This screen's top left icon lets them choose light or dark mode like the welcome screen.
 
 ###### Dark Mode
 
@@ -46,151 +46,53 @@ Once the user selects the "Start Editing" button, or if they have visited the we
 
 ##### Colour Scheme
 
-Perhaps the most widely distributed use of Markdown on the internet is on GitHub, as such, I felt that using [GitHub's colour scheme](https://primer.style/foundations/color/base-scales) would be appropriate to allow the user to preview the Markdown in the context that it will likely be distributed, in the form of a README similar to this file. I also feel that GitHub's neutral colour scheme is appropriate for this project as it will not be overstimulating whilst the user is attempting to write their Markdown. Bright flashy colours may distract the user. I also decided that dark mode would be the best as our default colour scheme as it avoids any accidental issues with bright light, for example, if someone's eyes were adjusted to the dark, a bright light will ruin that adjustment, whereas, if someone's eyes are adjusted for the light, a dark screen will minimally change that, if at all.
+As Markdown is widely used on GitHub, I thought it would be appropriate to use [GitHub's colour scheme](https://primer.style/foundations/color/base-scales) to preview the Markdown in a README format like this file. I think GitHub's neutral colour scheme is good for this project because it won't distract users as they write Markdown. Flashy colours can distract users. I also chose dark mode as our default colour scheme because it avoids accidental issues with bright light. For instance, if someone's eyes are adjusted to the dark, a bright light will ruin that adjustment, but a dark screen will barely change that.
 
 #### Accessibility
 
-As discussed above, GitHub's colour scheme will have already been tested for accessibility, however, I ran some basic colour blindness simulations, using [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/) to ensure that the UI was appropriate for users with colour blindness, the results of these are available [here](assets/readme-images/colour-blindness-simulations). Other important accessibility considerations that will be required in the implementation are keyboard navigation, to ensure that individuals navigating without a mouse can easily navigate the tool, this will primarily involve ensuring that the "Start Editing" button can be pressed without a mouse, and that the font selection, "Load Markdown" and "Save Markdown", and "Clear Markdown" buttons can be pressed, and that the user can easily return to the editor box. Further important accessibility testing will be to ensure that screen readers are able to correctly read the markdown editing box. Due to the scope and resourcing of this project, languages will not be accounted for, however, this would typically be an important accessibility consideration for a project - in this case, the site will be available in English only. We should also consider individuals devices, as such, responsive design will be important; editing Markdown on a phone is not ideal, but we should allow a user to do this if we wish and scale the page as appropriate, similarly, we need to account for both large and small desktop monitors to ensure that users in all ranges can use the site. There will be no animations on this site, as such, there is no need to consider this, however, we will add a timeout to the dark mode and light mode switcher to avoid any accidental mass-activations which could trigger photosensitivity.
+Although GitHub's colour scheme has already been tested for accessibility, I ran some basic colour blindness simulations using [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/) to make sure the UI was accessible to colour blind users. The results are available [here](assets/readme-images/color-blindness-simulations). Keyboard navigation will be needed to allow users without mice to navigate the tool, including the "Start Editing" button, font selection, "Load Markdown" and "Save Markdown" buttons, and "Clear Markdown" button. A user must also be able to return to the editor box. Another crucial accessibility test will ensure screen readers can read the markdown editing area. The site will be in English exclusively. Responsive design will be important: editing Markdown on a phone is not ideal, but we should allow a user to do so and scale the page as needed. No animations will be on this site, thus no need to address this, however we will add a timeout to the dark mode and bright mode switcher to prevent accidental mass-activations that could cause photosensitivity.
 
 ### Software
 
-This is an initial view of the design of the software.
-
 ### Architecture
 
-The software will have a frontend, built in React, this will implement a responsive user interface. It will then feature a backend which will be hosted to handle the Markdown-to-HTML rendering, this will allow us to adopt a server-side processing approach. Server-side processing is appropriate as this project is at a small scale, as such, we will not be overly concerned with servers being overwhelmed.
+The React frontend will provide a responsive user interface. A hosted backend will render Markdown-to-HTML, allowing us to use server-side processing. Due to the tiny size of this project, server-side processing is appropriate and will not overwhelm servers.
 
 #### Backend Architecture
 
-The backend will be implemented with Node.js, and will feature two main endpoints:
-- GET `/render` - this will convert Markdown to HTML
-- GET `/fonts` - this will return a list of available fonts to the user
+The backend will use Express.js and have two endpoints:
+- GET `/render` converts Markdown to HTML.
+- GET `/fonts` returns a list of available fonts.
 
 #### Frontend Architecture
 
 The frontend will be implemented with React, and will feature these main components:
 - Welcome Page:
-  - An icon for light and dark mode
-  - A text area for title and description
-  - A button for the "Start Editing" button
+  - Light/dark mode selector
+  - Text field for title and description
+  - A "Start Editing" button
 - Editing Screen:
-   - A text area where the user will input the Markdown and it is converted to HTML
-   - A header to contain the title and light and dark mode selector
-   - A sidebar to contain the font selector, and control buttons
-   - Several buttons within the sidebar for controls
+  - A Markdown input field that converts to HTML.
+  - Title and light/dark mode selector header
+  - A font selector and control buttons sidebar
+  -Several sidebar control buttons
+
 
 ### Implementation Approach
 
-In order to ensure the program is robust a Test-Driven Development approach will be taken. This will require that before adding a feature, a test is written to test the feature, and then the feature is implemented to make the test pass. In order to test the frontend we will use Jest's React Testing Library to perform component-level testing to ensure that all components are implemented as designed. In order to ensure that the backend functions correctly, integration unit tests will be written to test each endpoint and its function, any externals will be mocked to ensure that our code is being tested. In order to supplement this implementation approach, we will use GitHub Actions to implement a CI/CD pipeline that ensures that the project builds, that all tests pass, and that the code is linted in the correct format, before a PR can be merged. We will also use the pipeline to deliver any changes from a PR to the live software once merged.
+To ensure program robustness, Test-Driven Development will be used. Before adding a feature, a test must be prepared and then the feature built to pass the test. Component-level testing with Jest's React Testing Library will ensure that all frontend components are implemented as expected. We will write integration unit tests to test each endpoint and its function and mock externals to test our code to guarantee the backend works properly. Using GitHub Actions, we will create a CI/CD pipeline that builds the project, passes all tests, and lints the code before merging a PR. The pipeline will also push PR changes to live software after merging.
 
 ## Planning
 
-In order to create a well-rounded project I want to work using an Agile approach utilising sprints in order to deliver the solution in stages. In order to assist my development of the solution, I will use several tools, the details of these are below.
+For a well-rounded project, I want to use Agile sprints to provide the solution in stages. The following tools will help me design the solution.
 
 ### Personas and User Stories
 
-The first tool I plan to use in order to guide my development is the use of user stories. Firstly, in a set of high-level stories that outline the main overall requirements of the project, and then with each feature having its own, more specific user story. To further aid this, I have also created three personas who will each have their own goals and struggles, and I have created empathy maps of each of these, when a feature is being developed, I will specify which persona(s) it is for.
-
-#### Personas
-
-##### Developer Dave
-
-Developer Dave is a Junior Developer aged 20.
-
-###### Goals:
-1. To be able to quickly view Markdown documentation such as README files.
-2. To be able to modify and save reusable Markdown content to share it with his team.
-3. To gain a greater understanding of Markdown and how it can be used for writing.
-
-###### Frustrations:
-1. He regularly works with tools that have no previews, this means that any syntax mistakes aren't noticed until the Markdown is built.
-2. His current employer supported Markdown tool only has light mode available.
-
-###### Empathy Map:
-
-Dave Says:
-- "I need to notice errors in my Markdown before it is too late"
-- "Light mode strains my eyes, I need a dark mode option"
-- "I'd like to learn more about Markdown whilst using it"
-
-Dave Thinks:
-- "How can I avoid wasting time fixing Markdown that is already built?"
-- "Is there a tool that makes working with Markdown visually enjoyable?"
-
-Dave Feels:
-- Frustration that he cannot use a tool with live previews.
-- Annoyance that the tools available do not offer dark mode.
-- Curiosity about how he can utilise Markdown more.
-
-Dave Does:
-- Writes README and documentation files in Markdown.
-- Builds Markdown without a live preview, resulting in syntax issues.
-- Seeks tools with dark modes available.
-
-##### Writer Wendy
-
-Writer Wendy is an experienced Content Developer aged 35.
-
-###### Goals:
-1. To be able to edit documentation in Markdown in a more lightweight environment.
-2. To be able to view a live preview as she writes new Markdown or edits existing Markdown.
-
-###### Frustrations:
-1. She currently uses an IDE to edit Markdown which she does not use for anything else, she feels this is unnecessarily bloated.
-2. Many of the interfaces that she uses are not intuitive and require lots of mouse movement, slowing her workflow down.
-
-###### Empathy Map:
-
-Wendy Says:
-- "Why do I need a whole IDE setup when I just want to edit Markdown?"
-- "I want to see exactly what my content looks like as I write it"
-- "These clunky IDE interfaces slow my work down"
-
-Wendy Thinks:
-- "Why am I using an IDE for simple text editing?"
-- "Can I streamline my workflow or make it faster using a keyboard?"
-- "Will any alternatives help me write content faster?"
-
-Wendy Feels:
-- Irritation that she needs to use bloated software for a simple text editing task.
-- Motivation to find an alternate tool.
-
-Wendy Does:
-- Wites and edits technical content in Markdown.
-- Spends excessive time using non-intuitive and bloated interfaces.
-
-##### Educator Eric
-
-Educator Eric is an experienced University Educator aged 42.
-
-###### Goals:
-1. To be able to produce all of his educational materials in Markdown.
-2. To be able to educate students on Markdown in a way that is lightweight and easy to understand.
-3. To be able to produce study materials with syntax highlighted code.
-
-###### Frustrations:
-1. Tools are never tailored to and educational environment.
-2. There are very few word processors that can provide syntax highlighted code.
-3. Students do not understand how powerful Markdown is.
-
-###### Empathy Map:
-
-Eric Says:
-- "Using Markdown makes text writing easier and more professional"
-- "Why is it so hard to find a word processor that supports syntax highlighting?"
-- "I really need tailored tools for teaching Markdown"
-
-Eric Thinks:
-- "How can I make Markdown more accessible to my students?"
-- "How can I make visually engaging education materials with Markdown?"
-
-Eric Feels:
-- Annoyed that large tools overlook educational use cases.
-- Pride when students understand Markdown.
+User stories will be my initial development tool. First, in high-level stories that explain the project's core requirements, then in user stories for each feature. To help with this, I've established three personas with their own aims and difficulties, as well as empathy maps of each. When developing a feature, I'll designate whose persona it's for. The personas are available [here](./personas.md)
 
 #### High-Level User Stories
 
-Based on the personas and empathy maps, I have created 5 high-level user stories:
+From personas and empathy maps, I generated 5 high-level user stories:
 1. As a user, I want to view live previews of my Markdown content so that I can immediately see how it will render any rectify any issues.
 2. As a user, I want the option to customise the view of the editor, such as, switching between light and dark mode so that the website is accessible.
 3. As a user, I want the editor to be lightweight and intuitive, so that I can focus on editing Markdown rather than learning the tool I am using.
@@ -199,7 +101,7 @@ Based on the personas and empathy maps, I have created 5 high-level user stories
 
 ### MoSCoW Prioritisation
 
-In order to prioritise the stories that will be completed, I have created a MoSCoW prioritisation, this will allow me to decide which stories are the most important to be developed, and which can be left to later stages or made optional.
+I've devised a MoSCoW prioritisation to identify which stories are most critical to develop and which may be left to later stages or made optional.
 
 | Must Have | Should Have | Could Have | Wont Have |
 | - | - | - | - |
@@ -208,125 +110,119 @@ In order to prioritise the stories that will be completed, I have created a MoSC
 | Web Accessibility | | Templates |
 | Accessible Design | | Responsible Web Design
 
-Notably, I have added wont have "Collaboration Features"; this is something that I feel would enhance the educational aspect of the tool, to suit Educator Eric, and is something that I would like to add in the future, but I do not feel it fits into the scope of this MVP.
+I included won't have "Collaboration Features" since I think it would improve the tool's instructional component for Educator Eric, but it's not in the MVP's scope.
 
 ### Project Management
 
-All of the project management strategy will be carried out using tools available in GitHub, this is ideal as it ensures that the Source Code Management and Project Management are in the same place. Below are details of different items we will use to manage this project, how they will be used, and why we are using them.
+All project management approach will be done using GitHub tools, which is great because it keeps Source Code Management and Project Management together. This project will be managed utilising the following items, how they will be used, and why.
 
 #### Issues, Epics and Stories
 
-The primary tool to allocate and decide work, both for bugs, features, infrastructure changes, and anything else, will be through GitHub issues. These are available on the repositories [issue page](https://github.com/Dinoosawruss/software-engineering-summative-1/issues) and provide an outlet to write a description for any piece of work that will be carried out.
+Issues on GitHub will be the main way to assign and prioritise bugs, features, infrastructure modifications, and other activities. The repositories' [issue page](https://github.com/Dinoosawruss/software-engineering-summative-1/issues) allows you to describe any work.
 
-There will be five types of issue used within the project:
-1. Feature Story - A piece of work that is a feature to be added, this should be in the form of a user story (i.e. As a user, I want to do x, so that I can y).
-2. Epic - These will be a collection of work in the form of Feature Story or Infrastructure (below) issues. The Epic should have a description that covers all of the work within it.
-3. Bug - Any bugs within the project should be reported through bug issues, these will be handled outside the normal project management scheme and will not be part of a Sprint, Epic, etc.
-4. Infrastructure - These are changes that involve changes to any development or project management infrastructure used by the project.
-5. Other - Any issue required that does not easily fit into one of these categories.
+Five issues types will be used in the project:
+1. A user story should be used to describe a feature to be introduced.
+2. Epics will be Feature Story or Infrastructure concerns. The Epic should describe all its work.
+3. Bugs should be reported through bug problems, which will be handled outside of the standard project management system and not part of a Sprint, Epic, etc.
+4. Project infrastructure modifications include development and project management infrastructure.
+5. Other—Any issue not easily fit into these categories.
 
-Infrastructure and Feature issues will always be assigned to an Epic unless they are clearly a discrete and standalone piece of work. This will ensure that the project is driven in a way where features are always associated with some larger piece of work.
+Infrastructure and Feature issues are usually inside Epics unless they are clearly identifiable as separate work. This will drive the project so that features are always linked to a broader project.
 
 #### Sizing
 
-As part of the Feature and Infrastructure issue creation process, they should be sized. In this project we will use shirt sizing in order to allocate the size of each issue, i.e. Small, Medium, Large, Extra Large. The size allocated should be based on the amount of work that the change is expected to require, rather than some measure of time; one should not consider how long it will take them to implement the feature, they should consider how much work it will be. The sizing of issues will ensure that the amount of work within each sprint can be balanced and that issues remain an appropriate size. Any issues sized as Extra Large are to big, it is required that they are broken up into smaller issues. Sizes will be displayed in the form of labels.
-
-Only Infrastructure, Feature and *some* Other issues should be sized. Any issue that is sized should, ideally, be associated with an Epic as it should form a larger piece of work.
+They should be sized during Feature and Infrastructure issue generation. This project will employ shirt sizing to size each issue. Small, Medium, Large, Extra Large. Instead of considering how long it will take to create the feature, one should assess how much effort it will demand. Issue Size ensures that sprint workloads are balanced and issues are the right size. Extra Large issues must be split into smaller ones. Labels will show sizes. Size only infrastructure, feature, and *some* other issues. Sized issues should be part of an Epic because they build a larger work.
 
 #### Prioritisation
 
-All issues, except for Epics, should be allocated a priority, this will allow the assessment of the importance of that piece of work. The priority allocations available will be Urgent, High, Medium, and Low. This priority should consider both the importance of the issue being completed, but also the importance of issues it may block. Urgent issues will be reserved for things that are absolutely critical, due to their nature, they should be the next thing completed within the current sprint no matter what. Similarly to sizing, prioritisation will be displayed in the form of labels.
+All issues except Epics should be prioritised to determine their importance. Urgent, High, Medium, and Low priorities are available. This priority should weigh the importance of completing the issue and the issues it may block. Urgent issues will be kept for crucial items that must be completed within the sprint. Prioritisation will be labelled like size.
 
 #### Sprints
 
-The development of the project will be completed incrementally using sprints. A sprint is a short period where a set amount of work should be completed. Due to the time constraints of this project, each sprint will be a one day period, except for Sprint 0 which is the initialisation sprint that all planning work is completed in. Each issue should be allocated a sprint label, and a new sprint label should be created if a further sprint will be required. This will allow for an iterative development approach. Each sprint should aim to complete a set of or single Epic, depending on the size of the Epic. If an Epic is not completed within the sprint period then it should be carried over into the next sprint.
+Project development will be done in sprints. Sprints require a specified amount of effort in a short time. Every sprint except Sprint 0, which is the initialisation sprint where all planning is done, will be one day due to project time limits. You should assign a sprint label to each issue and generate a new one if a sprint is needed. This enables iterative development. Depending on Epic size, each sprint should complete one or more Epics. Epics should be carried over into the next sprint if not finished.
 
 #### GitHub Projects
 
-In order to manage the work and view it, we will use a Kanban board with GitHub Projects. The GitHub Project for this repository is available [here](https://github.com/users/Dinoosawruss/projects/1). The board will have columns for work that is on the backlog, in progress, blocked, in review, and done. As work is worked on it should be moved across the board to the appropriate column to ensure that the GitHub Project reflects the current state of the project. There is also a tab for Epics on the project board, this tab will show a table of all of the epics, along with their status and label to display which sprint it is part of. The project also features a PR tab which will show a page with the current status of all of the pull requests in the project.
+We'll utilise GitHub Projects' Kanban board to manage and view work. Here is the GitHub Project for this repository: https://github.com/users/Dinoosawruss/projects/1. The board will feature columns for backlog, in progress, blocked, reviewed, and done work. The GitHub Project should represent the current state of the project by moving work across the board to the relevant column. The project board has an Epics tab that lists all epics, their status, and their sprint. A PR tab displays the status of all pull requests in the project.
 
-The aim of the GitHub Project board is to give any stakeholder a simple view of the current state of the project. If this were a traditional open source project, this would allow anyone to see the current state of the project and see what work may be available to be picked up. For this project, the board will primarily be used for my own internal tracking to ensure that I maintain situational awareness on which items are in progress, on the backlog, or blocked.
+The GitHub Project board gives stakeholders a simple picture of the project's status. If this were a standard open source project, anyone could see the present condition and find employment. The board will be used for internal tracking for this project to keep me informed of items in progress, on the backlog, and blocked.
 
 ### Risks
 
-The primary project risk is the time constraint. Due to this I have decided to create a sprint cycle of a single day, this means that if work is not completed in a sprint it could significantly delay further sprints as there is not the time allowance to rectify the issue. This could result in the final project missing some features.
+Time limitation is the main project risk. Due to this, I have created a single-day sprint cycle, which means that if work is not completed in a sprint, it could postpone future sprints because there is no time to fix the issue. This could leave some functionalities out of the final project.
 
-A further risk is performance, as we will use server-side rendering. If a large Markdown file was used or a significant number of individuals decided to use the tool at the same time they may encounter performance issues as only limited resource will be allocated to the website.
+Due to server-side rendering, performance is another risk. If a huge Markdown file was used or several people utilised the tool at once, the website may have performance issues due to restricted resources.
 
 ## Documentation
 
-This section will describe how both how to use the tool from a user and developer perspective.
-
 ### User
 
-GoodMark is deployed to the web on Render, and is available [here](https://software-engineering-summative-1-frontend.onrender.com/). Please note, as this is a free instance after 50 seconds of inactivity the deployment will spin down, if you load the URL, it will come back up again, please allow at least 1 minute for it to work and your initial Markdown to be rendered.
+Render hosts GoodMark on the web (https://software-engineering-summative-1-frontend.onrender.com/). As this is a free instance, the deployment will spin down after 50 seconds of inactivity. If you load the URL, it will come back up, but please take at least 1 minute for it to work and render your initial Markdown.
 
-On your first visit, you will be greeted by the Welcome Screen, on this screen you are able to select your light/dark-mode preference and enter the editor. Your initial preference will be based on the preference assigned on your Operating System. Once you have visited this screen, you will not see it again.
+On your first visit, the Welcome Screen lets you choose light/dark mode and access the editor. Your OS preference will determine your initial preference. You'll never see this screen again.
 
 ![The Welcome Screen of the application, showing stating "GoodMark, a lightweight, web-based Markdown editor" and a button to "Start Editing"](./assets/readme-images/implemented-goodmark-welcome-screen.png)
 
-You will then be greeted by the Editor Screen, here you can edit Markdown and view a live preview. On your first visit, this will contain a piece of sample Markdown to demonstrate some of the features available, on subsequent visits, this will contain whatever you last had in your editor. If you wish to load some existing Markdown or text file from your machine, you can use the "Load Markdown" button, and if you wish to save the Markdown in the editor to your screen, you can use the "Save Markdown" button. You can switch between light/dark-mode with the icon in the top left. You can select your preferred font using the selector box in the top right. Finally, you can clear the text in your Markdown editor with the "Clear Markdown" button in the bottom right.
+The Editor Screen lets you edit Markdown and preview it live. The initial visit will have example Markdown to demonstrate some of the functionality, and following visits will contain whatever was in your editor. Use the "Load Markdown" button to load a Markdown or text file from your computer, and the "Save Markdown" button to save the editor's Markdown to your screen. Switch between light and dark mode using the top-left icon. Top right selector box lets you choose your typeface. Last, click "Clear Markdown" in the bottom right of your Markdown editor.
 
 ![The Editor Screen, see description above](./assets/readme-images/implemented-edting-screen-dark.png)
 
-And that's it! It's a very simple Markdown editing tool - so - happy editing!
+All done! Happy Markdown editing with GoodMark!
 
 ### Technical
 
-The Markdown editor is all in one monorepo, split into `/frontend` and `/backend`. The frontend is a Next.js application with two main pages, the index page, and a `/editor` page. The backend is a Express.js backend application with two main endpoints, `POST /render` and `GET /fonts`. All of the Markdown rendering is performed server-side on the backend, with the frontend simply receiving the HTML result.
+The Markdown editor is a single repository with `/frontend` and `/backend` sections. The frontend uses Next.js and has two main pages: index and `/editor`. The backend uses Express.js and has two endpoints: `POST /render` and `GET /fonts`. All Markdown rendering is done server-side, while the frontend receives HTML.
 
 #### Setup Instructions
 
-In order to set GoodMark up to run locally you will need to:
+Setting up GoodMark locally requires:
 
-1. Ensure that you have [Node.js](https://nodejs.org/en) installed.
-2. Ensure that you have [git](https://git-scm.com/) installed.
-3. Clone the git repository, using `git@github.com:Dinoosawruss/software-engineering-summative-1.git`
-4. Enter the `/backend` directory and run `npm install`.
-6. You should now be able to start the backend server with `npx nodemon index.js`.
-7. Enter the `/frontend` directory and run `npm install && npm run build`.
-8. Create a `.env.local` file with `NEXT_PUBLIC_BACKEND_URL=http://localhost:5000`
-9. You should now be able to start the frontend server with `npm run dev`.
-10.  You should now be able to use the frontend at http://localhost:3000 and the backend at http://localhost:5000
+1. Install [Node.js](https://nodejs.org/en).
+2. Install git (https://git-scm.com/).
+3. Clone the git repository with `git@github.com:Dinoosawruss/software-engineering-summative-1.git`.
+4. In the `/backend` directory, run `npm install`.
+5. Launch the backend server with `npx nodemon index.js`.
+6. In the `/frontend` directory, run `npm install && npm run build`.
+7. Create a `.env.local` file with `NEXT_PUBLIC_BACKEND_URL=http://localhost:5000`.
+8. Use `npm run dev` to start the frontend server.
+9.   The frontend and backend should now be available at http://localhost:3000 and http://localhost:5000.
 
 #### Deployment and CI/CD
 
-There are three main CI/CD pipelines that will run on your pull requests for validation. The first of these is a dependency check GitHub Action, which will ensure the project has no dependencies with active security vulnerabilities, a Build and Test check will then run which will build the project at Node.js 18, 20, and 22. Whilst these are running, [Render](https://render.com/) will automatically begin a deployment of the project. You can view this by pressing "View Deployment". This will give you a deployed version of your PR available on the web.
-
-Once your PR is merged, these deployments will run again building, testing, and then deploying to the main deployment.
+Three main CI/CD pipelines validate pull requests. First, a dependency check GitHub Action will ensure the project has no active security vulnerabilities. Next, a Build and Test check will build the project at Node.js 18, 20, and 22. While these execute, [Render](https://render.com/) will deploy the project automatically. Press "View Deployment" to see this. This deploys your PR online. Once your PR is merged, these deployments will rebuild, test, and deploy to the main deployment again.
 
 #### Testing
 
-There is a comprehensive unit test suite. All development should use a Test Driven Development approach to ensure that there is good code coverage and the suite remains strong. In order to perform the tests you can use `npm test` on both the frontend and the backend. Both use jest for testing, with the frontend using `swc/jest`.
+A complete unit test suite exists. Test-driven development should be used for all development to ensure code coverage and suite strength. Use `npm test` to run tests on both the frontend and backend. Both use jest for testing, with the frontend utilising `swc/jest`.
 
 ## Narrative
 
-This section will describe the process of implementing the project, discussing what I did in each sprint and how I went about doing it.
+In this section, I'll explain how I implemented the project in each sprint.
 
 ### Sprint 0
 
-Sprint 0 focused on setting the project up and doing all of the Software Engineering "admin" required. This included creating issue templates, adding branch protection rules, writing up the README, adding CI/CD pipelines such as the build, dependency test, and deployment pipelines. This sprint was the longest sprint as it involved a significant amount of pre-work, however, it laid a strong foundation to build upon in further sprints.This sprint also involved creating UI designs in Figma, [available here](#design) and creating all of the Epic, Feature, and Infrastructure issues that would be required for the project. I then went on to allocate all of the sprints.
+Sprint 0 was dedicated to project setup and Software Engineering "admin". This featured issue templates, branch protection rules, README writing, and CI/CD pipelines including build, dependency test, and deployment. This sprint was the longest because it required a lot of pre-work, but it laid a solid foundation for future sprints. It also involved creating Figma UI designs [available here](#design) and all Epic, Feature, and Infrastructure issues for the project. I then assigned all sprints.
 
 ### Allocating Sprints
 
-Initially, once I had decided on all of my issues and epics, I needed to allocate each Epic into a Sprint so that I could begin working on Sprint 1. I performed this process by primarily considering the importance of each Epic to the one before. For example, the backend epic is essential to have been completed before the performance once, such, it would be illogical to have the backend epic in a sprint after the performance one. As such, in the end I felt that there was a natural order of the epics. Backend and Sever Functionality (#32) and Markdown Editing Core Features (#28) would form Sprint 1, as these were required before any other work could be completed. Then I would complete UI and Accessibility (#36) in Sprint 2, as it formed a significant amount of work, and may impact performance considerations. Then I finally decided to do Performance (#38) and Welcome Screen and Personalisation (#37) in Sprint 3. The only notable feature issue was Setup React Frontend (#39), which had to be completed outside of its Epic in Sprint 2 as it was essential for Markdown Editing Core Features (#38). Overall, I felt that this was a good natural order for the Epics, and such began working on Sprint 1.
+After deciding on all my issues and epics, I had to assign each Epic to a Sprint to start Sprint 1. This procedure focused on Epic importance to the previous one. It would be irrational to sprint the backend epic after the performance epic because it must be done first. I concluded that epics had a natural order. Sprint 1 consisted of Backend and Sever Functionality (#32) and Markdown Editing Core Features (#28), which were necessary before continuing. UI and Accessibility (#36) was a lot of work and may affect performance, therefore I would finish it in Sprint 2. I chose Performance (#38) and Welcome Screen and Personalisation (#37) for Sprint 3. Markdown Editing Core Features (#38) required Setup React Frontend (#39) to be accomplished outside of Sprint 2, the only notable feature issue. The Epics' natural order seemed good to me, so I started Sprint 1.
 
 ### Sprint 1
 
-Sprint 1 had a slightly slow start due to issues with the CI/CD pipelines created in Sprint 0, however, once those issues were ironed out I was able to make a strong start on initialising the project and adding the basic features. I started by creating the backend using Express.js, and implemented the `POST /render` endpoint using a library called `marked` which converts Markdown to HTML. In order to implement the endpoint I used Test Driven Development (TDD), such, before writing any code I would first implement a test, for example, ensuring that `# Hello` returns `<h1>Hello</h1>`, then, I would implement the solution to that test. After this I was able to set up the Next.js React frontend, during this time, I also had to set up frontend deployment as I realised that only backend deployment had previously been setup in Sprint 0. I was then able to add the Markdown rendering and calls to the `POST /render` backend. This was the most significant piece of work in Sprint 1 and yielded a visible result which was good to see. Similarly to the backend I also implemented this using TDD, using TDD to ensure that elements were added and functioned as expected. I was then able to implement the Save, Load, and Clear Buttons. Finally during Sprint 1 I added syntax highlighting with Prism.js. Due to this sprint containing a relatively significant amount of work, with initialisation and implementation, some of the time period ate into Sprint 2.
+Sprint 1 started slowly due to issues with Sprint 0's CI/CD pipelines, but once these were resolved, I was able to start the project and add basic features. I built the backend using Express.js and implemented the `POST /render` endpoint using `marked`, a library that converts Markdown to HTML. I used Test Driven Development (TDD) to create the endpoint. First, I implemented a test to ensure that `# Hello` returns `<h1>Hello</h1>`, then implemented the answer to that test. After this, I set up the Next.js React frontend and frontend deployment as Sprint 0 had only set up backend deployment. Finally, I added Markdown rendering and calls to the `POST /render` backend. This Sprint 1 task was the most important and produced a pleasing result. Like the backend, I used TDD to add and test items. I then added Save, Load, and Clear Buttons. Final Sprint 1 addition: Prism.js syntax highlighting. Due to its large initialisation and implementation workload, some of this sprint ate into Sprint 2.
 
 ### Sprint 2
 
-Sprint 2 began with finishing some remaining work from Sprint 1. This included the syntax highlighting and work on the Save, Load, and Clear Buttons. Once this carry over work was complete, I was able to implement font selection. The font selection involved both creating a backend endpoint `GET /fonts`, to allow the site to have best control over what fonts are available, and changes to the front end to request, load, and change the fonts. This took significantly longer than it should have, as I was attempting to use `"Courier Prime" monospace`, however, the page would not render with that, this was because I was missing a comma, it should have been `"Courier Prime", monospace`. After I was able to resolve that issue I went on to implement a light and dark mode setting, initially based on your system preference, and then shortly after allowed the ability to switch between light and dark mode. I then spent a significant amount of time adding accessibility features, including various ARIA elements, and full keyboard navigation and shortcuts `Ctrl + S` and `Ctrl + O`. I also performed accessibility testing using both Chrome's features and Windows Narrator. Finally, I made the site responsive, using portrait and landscape view, to ensure that on a portrait device the editor and markdown preview would stack.
+Sprint 2 began with Sprint 1 work wrapping up. This contained syntax highlighting and Save, Load, and Clear button operations. I implemented font selection after this carry over work. To regulate font availability, the site created a backend endpoint `GET /fonts` and made changes to the front end to request, load, and change fonts. The process took longer than expected due to trying to use "Courier Prime" monospace, however the website would not render due to a missing comma. After fixing that issue, I added a light and dark mode setting based on your system choice and then allowed you to move between them. Accessibility features, such as ARIA components, keyboard navigation, and shortcuts `Ctrl + S` and `Ctrl + O`, were added after significant effort. I tested Chrome's and Windows Narrator's accessibility. Finally, I made the site responsive with portrait and landscape views to stack the editor and markdown preview on portrait devices.
 
 ### Sprint 3
 
-Finally, I could begin work on Sprint. This Sprint was split into two main themes, the first being the Welcome Screen and quality of life features, and the second being performance. I started with working on the Welcome Screen, this was relatively simple to implement as I could re-use many elements from the Editor screen, although it did require some changes to the file structure and testing suite which proved complicated. However, once resolved I was able to implement the Welcome Screen and automatic forwarding after the first visit. I then went on to implement the quality of life saving features, this included, saving your dark/light-mode preference, saving the last Markdown in the editor, and saving your last font selection. This was relatively simple to implement as I used `localStorage`, rather than cookies, which has a very simple key-value API. During this time there were some significant issues with the testing suite, this proved more complex as I had by this point built a relatively large testing suite so any issues would compound and result in many failures, I was able to resolve these issues in the [Bugs](#bugs) bust. I then moved on to performance, focusing on ensuring that the backend was scalable. Initially, I performed some scalability testing to determine the current baseline on the deployed instance. As the deployed instance is free, not much resource is allowed to it, as such, it was important to get a baseline to understand what a standard response time was. I was then able to implement some performance changes including caching, better error handing, and async API calls. I also made sure to sanitize the HTML response to avoid any Cross Site Scripting attacks. After these performance changes I performed a follow up scalability test, where we were able to see that the deployment could handle up to 90 requests per second with no HTTP losses. Such, I was happy with the performance overall and the MVP was implemented.
+Sprint work could finally commence. This Sprint had two key themes: Welcome Screen and quality of life, and performance. I started with the Welcome Screen, which was easy to construct because I could reuse many items from the Editor screen, but it required some sophisticated file structure and testing suite adjustments. After fixing that, I could create the Welcome Screen and automated forwarding after the first visit. I then added quality-of-life features like preserving your dark/light-mode option, last Markdown in the editor, and last font selection. The implementation was straightforward as I utilised `localStorage` instead of cookies, which provides a simple key-value API. In the [Bugs](#bugs) bust, I resolved some major issues with the testing suite, which was more complicated because I had constructed a massive testing suite and any issues would compound and cause numerous failures. Performance was next, focussing on backend scalability. To establish the deployed instance baseline, I ran scalability tests. Due to its free status, the deployed instance had limited resources, hence it was vital to establish a baseline response time. I then implemented caching, error handling, and async API calls to improve performance. I sanitised the HTML answer to prevent Cross Site Scripting. Following these performance adjustments, I ran a scalability test and found that the deployment could handle 90 requests per second without HTTP losses. Overall, the performance was good, and the MVP was applied.
 
 ### Bugs
 
-During the development I was able to protect myself against some bugs using TDD, this meant that many regressions and bugs were captured during the development cycle, minimising the number of bug tickets that had to be created and fixed outside of the sprint. However, a few were able to arise. The first of these was early on in the development, where the frontend was set to use `http://localhost:5000` for the backend, even on the deployed instance. As such, the user would have to deploy the backend on their own machine in order to use the tool, this is obviously incorrect so I implemented `dotenv` to pull the backend URL from a `.env` file. This worked well and required minimal setup on the deployment. I was then only capturing bugs through the development cycle and as such did not need to create tickets for them, however, during my testing in Sprint 3, I came across some bugs and created issues for them. I then decided that it would be best to address all of these bugs in one large bug-busting Pull Request. These bugs included, the dark and light mode selector regressing and no longer saving the last state, the markdown preview being centred after being forwarded from the welcome page, the keyboard controls regressing and not working, the Clear Markdown button not clearing the preview, and the default Markdown being added when there is an empty string in the `markdown` local storage key. I was able to successfully fix all of these issues, which was good. I wondered how these issues had managed to slip through, and then realised, they were in areas that were more difficult to cover with unit tests and such had no test case, therefore, where possible I also added test cases for these to ensure no regressions occur in future. There was 1 bug I have not been able to fix, where the font selected does not show in text in portrait mode, I have tried many different CSS changes but cannot fix this issue, such I have left the issue open.
+TDD helped me catch many regressions and errors during development, minimising the number of issue tickets I had to file and fix outside the sprint. However, some emerged. Early in development, the frontend used `http://localhost:5000` for the backend, even on deployed instances. I implemented `dotenv` to pull the URL from a `.env` file, avoiding users from deploying the backend on their own machine. This worked well and required little deployment. No tickets were needed because I only detected problems during the development cycle, however during Sprint 3, I uncovered bugs and filed issues. I fixed these issues in one huge Pull Request. App bugs include the dark and light mode selector not saving the last state, the markdown preview centring after forwarding from the welcome page, malfunctioning keyboard controls, the Clear Markdown button not clearing the preview, and the default Markdown being added when the local storage key is empty. It was excellent to resolve all these issues. I wondered how these issues had gone through, and then I saw they were in locations with few unit tests and no test cases, so I added test cases to prevent regressions. In portrait mode, the font is hidden. Several CSS tweaks failed to fix this issue, so I left it open.
 
 ## Evaluation
 
-To conclude, I feel this has been a successful project overall. It has been an excellent exercise in learning React, and Express.js and allowed me to gain a much better understanding of Test Driven Development and the development of web-services. I feel I have built an application that has a good testing framework behind it, and that it usable for a user and meets the User Stories I set out to fulfil. I have also made good use of the project management tools to track my work available in GitHub, and ensured that I keep the Project Management board up-to-date. There have been several technical challenges implementing the tool, including bugs, issues with testing, and learning how to use Next.js and Express.js, however, I have been able to overcome the majority of these. I feel that my choices in the way I implemented the project were good, however, I may have considered making Sprint 1 slightly smaller and perhaps adding an additional Sprint to ease some time pressure. I also think that I should have made the Sprints longer, for example, 2 or 3 days to ensure that I had adequate time to complete the work. Other than these few items, I feel overall the project has been a success, and that an open source contributor could easily review this README and use the tools already set out to begin contributing themselves. I feel that my personas would also be satisfied with the tool created, and that I have met my user stories well.
+Overall, I think this effort was successful. It taught me React and Express.js and improved my understanding of Test Driven Development and web-service development. I think my app has a good testing framework, is useable, and meets my User Stories. I've also used GitHub's project management tools to track my progress and update the board. I overcame most of the technical obstacles of building the tool, including bugs, testing issues, and learning Next.js and Express.js. I think my project implementation was good, although I might have made Sprint 1 smaller and added a Sprint to reduce time pressure. I also think I should have made the Sprints 2 or 3 days longer to give me more time to finish. Other than these few issues, I think the project has been successful, and an open source contributor could easily examine this README and utilise the tools to start contributing. I think my personas would like the tool and that I met their user stories.
