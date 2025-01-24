@@ -43,7 +43,16 @@ export default function EditorPage() {
   }, [backendUrl]);
 
   useEffect(() => {
-    setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const savedTheme = localStorage.getItem("data-theme");
+    console.log(savedTheme);
+    if (savedTheme) {
+      console.log(savedTheme);
+      setIsDarkMode(savedTheme === "dark");
+    } else {
+      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDarkMode(prefersDarkMode);
+      localStorage.setItem("data-theme", prefersDarkMode ? "dark" : "light");
+    }
   }, []);
 
   useEffect(() => {
@@ -55,8 +64,6 @@ export default function EditorPage() {
       setCurrentIcon("lightMode.svg");
       root.setAttribute("data-theme", "light");
     }
-
-    localStorage.setItem("data-theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
 
