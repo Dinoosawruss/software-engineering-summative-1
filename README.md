@@ -255,8 +255,76 @@ A further risk is performance, as we will use server-side rendering. If a large 
 
 ## Documentation
 
+This section will describe how both how to use the tool from a user and developer perspective.
+
 ### User
 
+GoodMark is deployed to the web on Render, and is available [here](https://software-engineering-summative-1-frontend.onrender.com/). Please note, as this is a free instance after 50 seconds of inactivity the deployment will spin down, if you load the URL, it will come back up again, please allow at least 1 minute for it to work and your initial Markdown to be rendered.
+
+On your first visit, you will be greeted by the Welcome Screen, on this screen you are able to select your light/dark-mode preference and enter the editor. Your initial preference will be based on the preference assigned on your Operating System. Once you have visited this screen, you will not see it again.
+
+![The Welcome Screen of the application, showing stating "GoodMark, a lightweight, web-based Markdown editor" and a button to "Start Editing"](./assets/readme-images/implemented-goodmark-welcome-screen.png)
+
+You will then be greeted by the Editor Screen, here you can edit Markdown and view a live preview. On your first visit, this will contain a piece of sample Markdown to demonstrate some of the features available, on subsequent visits, this will contain whatever you last had in your editor. If you wish to load some existing Markdown or text file from your machine, you can use the "Load Markdown" button, and if you wish to save the Markdown in the editor to your screen, you can use the "Save Markdown" button. You can switch between light/dark-mode with the icon in the top left. You can select your preferred font using the selector box in the top right. Finally, you can clear the text in your Markdown editor with the "Clear Markdown" button in the bottom right.
+
+![The Editor Screen, see description above](./assets/readme-images/implemented-edting-screen-dark.png)
+
+And that's it! It's a very simple Markdown editing tool - so - happy editing!
+
 ### Technical
+
+The Markdown editor is all in one monorepo, split into `/frontend` and `/backend`. The frontend is a Next.js application with two main pages, the index page, and a `/editor` page. The backend is a Express.js backend application with two main endpoints, `POST /render` and `GET /fonts`. All of the Markdown rendering is performed server-side on the backend, with the frontend simply receiving the HTML result.
+
+#### Setup Instructions
+
+In order to set GoodMark up to run locally you will need to:
+
+1. Ensure that you have [Node.js](https://nodejs.org/en) installed.
+2. Ensure that you have [git](https://git-scm.com/) installed.
+3. Clone the git repository, using `git@github.com:Dinoosawruss/software-engineering-summative-1.git`
+4. Enter the `/backend` directory and run `npm install`.
+6. You should now be able to start the backend server with `npx nodemon index.js`.
+7. Enter the `/frontend` directory and run `npm install && npm run build`.
+8. Create a `.env.local` file with `NEXT_PUBLIC_BACKEND_URL=http://localhost:5000`
+9. You should now be able to start the frontend server with `npm run dev`.
+10.  You should now be able to use the frontend at http://localhost:3000 and the backend at http://localhost:5000
+
+#### Deployment and CI/CD
+
+There are three main CI/CD pipelines that will run on your pull requests for validation. The first of these is a dependency check GitHub Action, which will ensure the project has no dependencies with active security vulnerabilities, a Build and Test check will then run which will build the project at Node.js 18, 20, and 22. Whilst these are running, [Render](https://render.com/) will automatically begin a deployment of the project. You can view this by pressing "View Deployment". This will give you a deployed version of your PR available on the web.
+
+Once your PR is merged, these deployments will run again building, testing, and then deploying to the main deployment.
+
+#### Testing
+
+There is a comprehensive unit test suite. All development should use a Test Driven Development approach to ensure that there is good code coverage and the suite remains strong. In order to perform the tests you can use `npm test` on both the frontend and the backend. Both use jest for testing, with the frontend using `swc/jest`.
+
+## Narrative
+
+This section will describe the process of implementing the project, discussing what I did in each sprint and how I went about doing it.
+
+### Sprint 0
+
+Sprint 0 focused on setting the project up and doing all of the Software Engineering "admin" required. This included creating issue templates, adding branch protection rules, writing up the README, adding CI/CD pipelines such as the build, dependency test, and deployment pipelines. This sprint was the longest sprint as it involved a significant amount of pre-work, however, it laid a strong foundation to build upon in further sprints.This sprint also involved creating UI designs in Figma, [available here](#design) and creating all of the Epic, Feature, and Infrastructure issues that would be required for the project. I then went on to allocate all of the sprints.
+
+### Allocating Sprints
+
+Initially, once I had decided on all of my issues and epics, I needed to allocate each Epic into a Sprint so that I could begin working on Sprint 1. I performed this process by primarily considering the importance of each Epic to the one before. For example, the backend epic is essential to have been completed before the performance once, such, it would be illogical to have the backend epic in a sprint after the performance one. As such, in the end I felt that there was a natural order of the epics. Backend and Sever Functionality (#32) and Markdown Editing Core Features (#28) would form Sprint 1, as these were required before any other work could be completed. Then I would complete UI and Accessibility (#36) in Sprint 2, as it formed a significant amount of work, and may impact performance considerations. Then I finally decided to do Performance (#38) and Welcome Screen and Personalisation (#37) in Sprint 3. The only notable feature issue was Setup React Frontend (#39), which had to be completed outside of its Epic in Sprint 2 as it was essential for Markdown Editing Core Features (#38). Overall, I felt that this was a good natural order for the Epics, and such began working on Sprint 1.
+
+### Sprint 1
+
+Sprint 1 had a slightly slow start due to issues with the CI/CD pipelines created in Sprint 0, however, once those issues were ironed out I was able to make a strong start on initialising the project and adding the basic features. I started by creating the backend using Express.js, and implemented the `POST /render` endpoint using a library called `marked` which converts Markdown to HTML. In order to implement the endpoint I used Test Driven Development (TDD), such, before writing any code I would first implement a test, for example, ensuring that `# Hello` returns `<h1>Hello</h1>`, then, I would implement the solution to that test. After this I was able to set up the Next.js React frontend, during this time, I also had to set up frontend deployment as I realised that only backend deployment had previously been setup in Sprint 0. I was then able to add the Markdown rendering and calls to the `POST /render` backend. This was the most significant piece of work in Sprint 1 and yielded a visible result which was good to see. Similarly to the backend I also implemented this using TDD, using TDD to ensure that elements were added and functioned as expected. I was then able to implement the Save, Load, and Clear Buttons. Finally during Sprint 1 I added syntax highlighting with Prism.js. Due to this sprint containing a relatively significant amount of work, with initialisation and implementation, some of the time period ate into Sprint 2.
+
+### Sprint 2
+
+Sprint 2 began with finishing some remaining work from Sprint 1. This included the syntax highlighting and work on the Save, Load, and Clear Buttons. Once this carry over work was complete, I was able to implement font selection. The font selection involved both creating a backend endpoint `GET /fonts`, to allow the site to have best control over what fonts are available, and changes to the front end to request, load, and change the fonts. This took significantly longer than it should have, as I was attempting to use `"Courier Prime" monospace`, however, the page would not render with that, this was because I was missing a comma, it should have been `"Courier Prime", monospace`. After I was able to resolve that issue I went on to implement a light and dark mode setting, initially based on your system preference, and then shortly after allowed the ability to switch between light and dark mode. I then spent a significant amount of time adding accessibility features, including various ARIA elements, and full keyboard navigation and shortcuts `Ctrl + S` and `Ctrl + O`. I also performed accessibility testing using both Chrome's features and Windows Narrator. Finally, I made the site responsive, using portrait and landscape view, to ensure that on a portrait device the editor and markdown preview would stack.
+
+### Sprint 3
+
+Finally, I could begin work on Sprint. This Sprint was split into two main themes, the first being the Welcome Screen and quality of life features, and the second being performance. I started with working on the Welcome Screen, this was relatively simple to implement as I could re-use many elements from the Editor screen, although it did require some changes to the file structure and testing suite which proved complicated. However, once resolved I was able to implement the Welcome Screen and automatic forwarding after the first visit. I then went on to implement the quality of life saving features, this included, saving your dark/light-mode preference, saving the last Markdown in the editor, and saving your last font selection. This was relatively simple to implement as I used `localStorage`, rather than cookies, which has a very simple key-value API. During this time there were some significant issues with the testing suite, this proved more complex as I had by this point built a relatively large testing suite so any issues would compound and result in many failures, I was able to resolve these issues in the [Bugs](#bugs) bust. I then moved on to performance, focusing on ensuring that the backend was scalable. Initially, I performed some scalability testing to determine the current baseline on the deployed instance. As the deployed instance is free, not much resource is allowed to it, as such, it was important to get a baseline to understand what a standard response time was. I was then able to implement some performance changes including caching, better error handing, and async API calls. I also made sure to sanitize the HTML response to avoid any Cross Site Scripting attacks. After these performance changes I performed a follow up scalability test, where we were able to see that the deployment could handle up to 90 requests per second with no HTTP losses. Such, I was happy with the performance overall and the MVP was implemented.
+
+### Bugs
+
+During the development I was able to protect myself against some bugs using TDD, this meant that many regressions and bugs were captured during the development cycle, minimising the number of bug tickets that had to be created and fixed outside of the sprint. However, a few were able to arise. The first of these was early on in the development, where the frontend was set to use `http://localhost:5000` for the backend, even on the deployed instance. As such, the user would have to deploy the backend on their own machine in order to use the tool, this is obviously incorrect so I implemented `dotenv` to pull the backend URL from a `.env` file. This worked well and required minimal setup on the deployment. I was then only capturing bugs through the development cycle and as such did not need to create tickets for them, however, during my testing in Sprint 3, I came across some bugs and created issues for them. I then decided that it would be best to address all of these bugs in one large bug-busting Pull Request. These bugs included, the dark and light mode selector regressing and no longer saving the last state, the markdown preview being centred after being forwarded from the welcome page, the keyboard controls regressing and not working, the Clear Markdown button not clearing the preview, and the default Markdown being added when there is an empty string in the `markdown` local storage key. I was able to successfully fix all of these issues, which was good. I wondered how these issues had managed to slip through, and then realised, they were in areas that were more difficult to cover with unit tests and such had no test case, therefore, where possible I also added test cases for these to ensure no regressions occur in future. There was 1 bug I have not been able to fix, where the font selected does not show in text in portrait mode, I have tried many different CSS changes but cannot fix this issue, such I have left the issue open.
 
 ## Evaluation
