@@ -1,6 +1,7 @@
 const express = require("express");
 const marked = require("marked");
 const NodeCache = require("node-cache");
+const sanitizeHtml = require("sanitize-html");
 
 const router = express.Router();
 const cache = new NodeCache();
@@ -20,9 +21,10 @@ router.post("/", async (req, res) => {
     }
 
     try {
-        const html = marked.parse(markdown);
-        cache.set(cacheKey, html);
-        res.json({html});
+        const rawHtml = marked.parse(markdown);
+        const sanitizedHtml = sanitizeHtml(rawHtml);
+        cache.set(cacheKey, sanitizedHtml);
+        res.json({ html: sanitizeHtml });
     } catch (err) {
         res.status(500).json({error: `Error rendering Markdown: ${err.message}`})
     }
