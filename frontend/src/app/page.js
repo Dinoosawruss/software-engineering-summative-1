@@ -287,7 +287,7 @@ export default function Home() {
             >Load Markdown</button>
           </div>
           <button
-            className={clearConfirmClass}
+            className={`${clearConfirmClass} clearButton`}
             onClick={clearMarkdown}
             aria-label={clearAria}
           >{clearButtonText}</button>
