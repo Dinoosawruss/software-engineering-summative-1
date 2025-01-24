@@ -95,3 +95,12 @@ Eric Thinks:
 Eric Feels:
 - Annoyed that large tools overlook educational use cases.
 - Pride when students understand Markdown.
+
+# High-Level User Stories
+
+From personas and empathy maps, I generated 5 high-level user stories:
+1. As a user, I want to view live previews of my Markdown content so that I can immediately see how it will render any rectify any issues.
+2. As a user, I want the option to customise the view of the editor, such as, switching between light and dark mode so that the website is accessible.
+3. As a user, I want the editor to be lightweight and intuitive, so that I can focus on editing Markdown rather than learning the tool I am using.
+4. As a user, I want to create and edit Markdown with syntax highlighting, so that code in the Markdown can be read easily.
+5. As a user, I want the tool to be accessible via the web, so that I can avoid downloading more software to my machine.
