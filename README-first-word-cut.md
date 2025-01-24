@@ -157,7 +157,7 @@ Due to server-side rendering, performance is another risk. If a huge Markdown fi
 
 ### User
 
-Render hosts GoodMark on the web (https://software-engineering-summative-1-frontend.onrender.com/). As this is a free instance, the deployment will spin down after 50 seconds of inactivity. If you load the URL, it will come back up, but please take at least 1 minute for it to work and render your initial Markdown.
+Render hosts GoodMark on the web [Render](https://software-engineering-summative-1-frontend.onrender.com/). As this is a free instance, the deployment will spin down after 50 seconds of inactivity. If you load the URL, it will come back up, but please take at least 1 minute for it to work and render your initial Markdown.
 
 On your first visit, the Welcome Screen lets you choose light/dark mode and access the editor. Your OS preference will determine your initial preference. You'll never see this screen again.
 
