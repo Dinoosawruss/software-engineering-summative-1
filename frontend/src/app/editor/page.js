@@ -67,8 +67,8 @@ export default function EditorPage() {
   }, [isDarkMode]);
 
 
-  const handleEditorChange = (event) => {
-    const newValue = event.target.value;
+  const handleEditorChange = (newValue) => {
+    localStorage.setItem("markdown", newValue); // Save Markdown first in case of issues
     setEditorText(newValue); // Update the state
     handleRender(newValue);  // Call the function with the latest value
     resetClearMarkdown(); // Reset the clear confirmation back to false
@@ -239,6 +239,13 @@ export default function EditorPage() {
     localStorage.setItem("selected-font", newFont);
   };
 
+  useEffect(() => {
+    console.log(localStorage.getItem("markdown"));
+    if (localStorage.getItem("markdown")) {
+      handleEditorChange(localStorage.getItem("markdown"));
+    }
+  });
+
   return (
     <div className="main">
       <h1 className="goodmark">
@@ -260,7 +267,7 @@ export default function EditorPage() {
         <textarea
           className="textzone"
           value={editorText}
-          onChange={handleEditorChange}
+          onChange={(event) => {handleEditorChange(event.target.value)}}
           rows="10"
           cols="50"
           style={fontStyle}
